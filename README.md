@@ -48,4 +48,4 @@ ___
 ### Cómo funciona
 Abres juego.html en tu navegador, y al clciar en el título te redirigirá a la pantalla principal.
 
-<p align="center">Prohibido la copia o uso de este código. &copy; 2020 - tryn0</p>
+<p align="center">&copy; 2020 - tryn0</p>
