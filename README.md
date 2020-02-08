@@ -46,7 +46,6 @@ Con esta librería se puede mover la cámara y girar la cámara con eje en el pl
 ___
 
 ### Cómo funciona
-Cargas el archivo juego.html en tu navegador, que usa juego.js, al aparecer el título lo clicas, y redirigirá a la pantalla principal.
+Abres juego.html en tu navegador, y al clciar en el título te redirigirá a la pantalla principal.
 
-Prohibido la copia o uso de este código.  
-&copy; 2020 - tryn0 
+<p align="center">Prohibido la copia o uso de este código. &copy; 2020 - tryn0</p>
