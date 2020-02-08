@@ -6,7 +6,8 @@ Esta rama Developer sirve para trabajar sobre ella para ir mejorando el proyecto
 ___
 
 ### Cosas a añadir
-- [ ] Clicar en Japón.
+- [ ] Añadir pantalla de carga entre pantalla de título y pantalla principal (NO prioritario)
+- [ ] Poder clicar en Japón. (PRIORITARIO)
 - [ ] Al clicar en Japón que muestre un mapa.
 - [ ] Al mostrar el mapa de Japón colocar como una ruta con los diferentes juegos.
 - [ ] Niveles bloqueados hasta haber completado el anterior (controlarlo con sesiones de PHP es fácil, o con BD)
