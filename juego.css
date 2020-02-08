@@ -1,0 +1,69 @@
+/*BODY*/
+body {
+  background: #13142b;
+}
+
+/*CANVAS (ARCOIRIS)*/
+canvas {
+  opacity: .6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/*IMPORTACION DE FUENTE SUPER MARIO PARA EL TITULO*/
+@font-face {
+  font-family: 'supermario256';
+  src: url('./fonts/SuperMario256.ttf')  format('truetype');
+}
+
+/*CONTENEDOR DEL TITULO*/
+#div{
+  font-family: 'supermario256';
+  text-align: center;
+  font-size: 7em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-text-stroke: 5px black;
+  color: #be0c0c;
+}
+/*TEXTO ARCOIRIS (ANIMACION) NO USADO*/
+/*#empezar{
+  font-family: 'Fjalla One', sans-serif;
+  text-align: center;
+  font-size: 2.5em;
+  position: absolute;
+  left: 50%;
+  top: 70%;
+  transform: translate(-70%, -50%);
+
+  background: linear-gradient(45deg,#FF0000,#FF7F00,#FFFF00,#00FF00,#0000FF,#4B0082,#8B00FF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 400% 400%;
+  
+  -webkit-animation: rainbowanim 8s ease infinite;
+  -moz-animation: rainbowanim 8s ease infinite;
+  animation: rainbowanim 8s ease infinite;
+}
+
+@-webkit-keyframes rainbowanim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes rainbowanim {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes rainbowanim { 
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}*/
