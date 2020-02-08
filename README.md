@@ -7,6 +7,7 @@ ___
 
 ### Cosas a añadir
 - [ ] Añadir pantalla de carga entre pantalla de título y pantalla principal (NO prioritario)
+- [ ] Añadir música en pantalla de título y principal.
 - [ ] Poder clicar en Japón. (PRIORITARIO)
 - [ ] Al clicar en Japón que muestre un mapa.
 - [ ] Al mostrar el mapa de Japón colocar como una ruta con los diferentes juegos.
