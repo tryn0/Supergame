@@ -14,7 +14,7 @@ De momento este proyecto sólo contiene lo que he creado yo sólo:
     + Arcoiris creado con canvas y con destellos o "brillitos".
     + Al acabar de pintar el arcoiris, con un setTimeout, aparece el título del juego.
     + Al hacer click en el título pasaría a la pantalla principal, un planeta tierra, con la cámara y la iluminación centrada en Japón. Puedes mover la cámara.
-+ En la pantalla principal, como he dicho antes, contiene un planeta tierra, [aquí](#three.js) explico en profundidad cómo lo hice.
++ En la pantalla principal, como he dicho antes, contiene un planeta tierra, [aquí](###three.js) explico en profundidad cómo lo hice.
 ___
 
 ### A hacer/ideas
@@ -43,3 +43,5 @@ ___
 
 ### Cómo funciona
 Cargas el archivo juego.html en tu navegador, que usa juego.js, al aparecer el título lo clicas, y redirigirá a la pantalla principal.
+
+Prohibido la copia o uso de este código. (c) 2020 - tryn0 
