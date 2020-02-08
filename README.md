@@ -1,9 +1,11 @@
 # Supergame
 
-### Autor/es
+### Contribuyentes
 - __[Esambino](https://codepen.io/Esambino/pen/Ahlxi)__ - Proyecto en CodePen, desde el cual partí para recrear el planeta tierra.
 - __[shalanah](https://codepen.io/shalanah/pen/ymRpPd)__ - Proyecto en CodePen, del que partí para hacer el arcoiris en canvas.
-- __[tryn0](https://github.com/tryn0)__ - Yo, recopilé código y del cual estos códigos empecé este trabajo.
+
+### Autor/es
+- __[tryn0](https://github.com/tryn0)__ - Recopilación de código. Pantalla del título y pantalla principal con la tierra.
 
 ___
 
