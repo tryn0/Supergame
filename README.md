@@ -49,4 +49,4 @@ ___
 Cargas el archivo juego.html en tu navegador, que usa juego.js, al aparecer el título lo clicas, y redirigirá a la pantalla principal.
 
 Prohibido la copia o uso de este código.  
-(C) 2020 - tryn0 
+&copy; 2020 - tryn0 
