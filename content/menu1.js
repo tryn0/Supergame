@@ -3,109 +3,251 @@ import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources
 //import {GUI} from 'https://threejsfundamentals.org/threejs/../3rdparty/dat.gui.module.js';
 
 $(document).ready(function () {
-    //Evitar seleccionar texto
-    $('html').css('user-select', 'none');
-
-
-    var scene = new THREE.Scene();
-    var renderer = new THREE.WebGLRenderer();
-
-    /*
-    In addition to creating the renderer instance, we also need to set the size at which we want it to render our app. 
-    It's a good idea to use the width and height of the area we want to fill with our game 
-    - in this case, the width and height of the browser window. For performance intensive games, you can also give setSize smaller values, 
-    like window.innerWidth/2 and window.innerHeight/2, for half the resolution. 
-    This does not mean that the game will only fill half the window, but rather look a bit blurry and scaled up.
-
-    Last but not least, we add the renderer element to our HTML document. 
-    This is a <canvas> element the renderer uses to display the scene to us.
-    */
-
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
-    camera.position.set(-25, 150, 100);
-
-    var controls = new OrbitControls(camera, renderer.domElement);
-    controls.maxDistance = 175;
-    controls.minDistance = 65;
-    controls.update();
-
-    /* Create Lights: PointLight / SpotLight etc.*/
-    var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(0, 75, 150);
-    spotLight.castShadow = false; //If set to true light will cast dynamic shadows. Warning: This is expensive and requires tweaking to get shadows looking right.
-    spotLight.shadow.mapSize.width = 2048;
-    spotLight.shadow.mapSize.height = 2048;
-    spotLight.shadow.camera.near = 50;
-    spotLight.shadow.camera.far = 5000;
-    spotLight.shadow.camera.fov = 90;
-    scene.add(spotLight);
-
-    /* Creación del Material */
-    function Mat() {
-        //Textura (imagen de la tierra)
-        var texture = new THREE.TextureLoader().load('../textures/tierra.jpg');
-        //Material
-        var material = new THREE.MeshPhongMaterial({
-            //color      : new THREE.Color("rgb(35,35,213)"),  //Diffuse color of the material
-            //emissive   : new THREE.Color("rgb(64,128,255)"), //Emissive(light) color of the material, essentially a solid color unaffected by other lighting. Default is black.
-            /*specular   : new THREE.Color("yellow"),*/
-            /*Specular color of the material, i.e., how shiny the material is and the color of its shine. 
-                                                                       Setting this the same color as the diffuse value (times some intensity) makes the material more metallic-looking; 
-                                                                       setting this to some gray makes the material look more plastic. Default is dark gray.*/
-            shininess: 1, //How shiny the specular highlight is; a higher value gives a sharper highlight. Default is 30.
-            //flatShading    : THREE.FlatShading,                  //How the triangles of a curved surface are rendered: THREE.SmoothShading, THREE.FlatShading, THREE.NoShading
-            wireframe: 1, //THREE.Math.randInt(0,1)
-            //transparent: 1,
-            //opacity    : 1,                                //THREE.Math.randFloat(0,1) 
-            map: texture
-        });
-        return material;
+    function _convertLatLonToVec3(lat, lon) {
+    lat = lat * Math.PI / 180.0;
+    lon = -lon * Math.PI / 180.0;
+    return new THREE.Vector3(
+        Math.cos(lat) * Math.cos(lon),
+        Math.sin(lat),
+        Math.cos(lat) * Math.sin(lon));
     }
 
-    /* Creación de la Geometría */
-    var geometry = new THREE.SphereGeometry(40, 350, 350, 0, Math.PI * 2, 0, Math.PI);
-    //SphereGeometry(radius, widthSegments, heightSegments, phiStart, phiLength, thetaStart, thetaLength)
+    function InfoBox(city, radius, domElement) {
+    this._screenVector = new THREE.Vector3(0, 0, 0);
 
-    /* Creación de la esfera de la tierra*/
-    var earth = new THREE.Mesh(geometry, Mat());
+    this.position = _convertLatLonToVec3(city.lat, city.lng).multiplyScalar(radius);
+
+    // create html overlay box
+    this.box = document.createElement('div');
+    this.box.innerHTML = city.name;
+    this.box.className = "hudLabel";
+
+    this.domElement = domElement;
+    this.domElement.appendChild(this.box);
+
+    }
+
+    InfoBox.prototype.update = function() {
+    this._screenVector.copy(this.position);
+    this._screenVector.project(camera);
+
+    var posx = Math.round((this._screenVector.x + 1) * this.domElement.offsetWidth / 2);
+    var posy = Math.round((1 - this._screenVector.y) * this.domElement.offsetHeight / 2);
+
+    var boundingRect = this.box.getBoundingClientRect();
+
+    // update the box overlays position
+    this.box.style.left = (posx - boundingRect.width) + 'px';
+    this.box.style.top = posy + 'px';
+    };
+
+    //--------------------------------
+    function Marker() {
+    THREE.Object3D.call(this);
+
+    var radius = 0.005;
+    var sphereRadius = 0.02;
+    var height = 0.05;
+
+    var material = new THREE.MeshPhongMaterial({
+        color: 0xDC143C
+    });
+
+    var cone = new THREE.Mesh(new THREE.ConeBufferGeometry(radius, height, 8, 1, true), material);
+    cone.position.y = height * 0.5;
+    cone.rotation.x = Math.PI;
+
+    var sphere = new THREE.Mesh(new THREE.SphereBufferGeometry(sphereRadius, 16, 8), material);
+    sphere.position.y = height * 0.95 + sphereRadius;
+
+    this.add(cone, sphere);
+    }
+    Marker.prototype = Object.create(THREE.Object3D.prototype);
+
+    // ------ Earth object -------------------------------------------------
+
+    function Earth(radius, texture, altura, agua) {
+    THREE.Object3D.call(this);
+
+    this.userData.radius = radius;
+
+    var earth = new THREE.Mesh(
+        new THREE.SphereBufferGeometry(radius, 300, 300),
+        new THREE.MeshPhongMaterial({
+            map: texture,
+            bumpMap: altura,
+            bumpScale: 0.025,
+            specularMap: agua
+        })
+    );
+
+    this.add(earth);
+    }
+    var marcadores = [];
+    Earth.prototype = Object.create(THREE.Object3D.prototype);
+
+    Earth.prototype.createMarker = function(lat, lon, name) {
+    var marker = new Marker();
+
+    var latRad = lat * (Math.PI / 180);
+    var lonRad = -lon * (Math.PI / 180);
+    var r = this.userData.radius;
+    this.userData.name = name;
+
+    marker.position.set(Math.cos(latRad) * Math.cos(lonRad) * r, Math.sin(latRad) * r, Math.cos(latRad) * Math.sin(lonRad) * r);
+    marker.rotation.set(0.0, -lonRad, latRad - Math.PI * 0.5);
+    marker.name = name;
+
+    this.add(marker);
+    marcadores.push(marker);
+    };
+
+    // ------ Three.js code ------------------------------------------------
+
+    var scene, camera, renderer, label;
+    var controls;
+
+    init();
+
+    function init() {
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 100);
+    //camera.position.set(0.0, 1.5, 3.0);
+    camera.position.set(-1.60, 1.5, -1.3);
+
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.maxDistance = 4;
+    controls.minDistance = 2;
+
+    /*var ambient = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambient);*/
+
+    var spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.position.set(-350, 0, -200);
+    spotLight.castShadow = false; //If set to true light will cast dynamic shadows. Warning: This is expensive and requires tweaking to get shadows looking right.
+    spotLight.shadow.mapSize.width = 1024;
+    spotLight.shadow.mapSize.height = 1024;
+    spotLight.shadow.camera.near = 50;
+    spotLight.shadow.camera.far = 10000;
+    spotLight.shadow.camera.fov = 60;
+    scene.add(spotLight);
+
+
+    //Textura (imagen de la tierra)
+    var texture = new THREE.TextureLoader().load('../textures/tierra.jpg');
+    //Textura de agua y tierra
+    var agua = new THREE.TextureLoader().load('../textures/tierra-agua.png');
+    //Textura de elevación del terreno
+    var altura = new THREE.TextureLoader().load('../textures/altura.jpg');
+
+    //Creación del planeta
+    var earth = new Earth(1.0, texture, altura, agua);
+
+    //Añadir marcador
+    earth.createMarker(35.683333, 139.683333, 'Tokio'); // Tokyo
 
     scene.add(earth);
 
-    //camera.position.z = 100;
+    //-------------
+    // globe
 
+    //var radius1 = 1;
 
+    //var sphere1 = new THREE.Mesh(new THREE.SphereGeometry(radius1, 16, 16));
+    // scene.add( sphere1 );
 
-    /*
-    Esta función creará un bucle que causará el renderizado del dibujo de la scene a 60fps.
-    Siguiente texto original:
-    If you're new to writing games in the browser, you might say "why don't we just create a setInterval? 
-    The thing is - we could, but requestAnimationFrame has a number of advantages. 
-    Perhaps the most important one is that it pauses when the user navigates to another browser tab, hence not wasting their precious processing power and battery life.
-    */
-    //requestAnimationFrame función por defecto que se realiza 60 veces por segundo.
-    function render() {
-        requestAnimationFrame(render);
-        /*
-        Para que rote hay que usar esto:
-        earth.rotation.x += 0.000;
-        earth.rotation.y += 0.002;
-        Solo rotará horizontalmente.
-        */
-        //Rotación indicada para centrar en Japon
-        earth.rotation.x = -0.35;
-        earth.rotation.y = 2.25;
-        renderer.render(scene, camera);
+    /*var city = {
+        "name": "Nader Hany",
+        "lat": 30,
+        "lng": 30
+    };*/
+
+    //var label = new InfoBox(city, radius1, document.body);
+    /*var material1 = new THREE.MeshPhongMaterial({
+        color: 0xDC143C
+    });
+    var marker1 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), material1);
+    marker1.userData = {
+        URL: "http://stackoverflow.com"
+    };
+    marker1.position.copy(label.position);
+    scene.add(marker1);
+
+    var city2 = {
+        "name": "Nader Hany",
+        "lat": 40,
+        "lng": 40
+    };*/
+    /*var label2 = new InfoBox(city2, radius1, document.body);
+    var geometry2 = new THREE.SphereGeometry(0.05, 16, 16);
+    var material2 = new THREE.MeshPhongMaterial({*/
+        /* map: THREE.ImageUtils.loadTexture('https://upload.wikimedia.org/wikipedia/commons/4/40/Egyptian_Revolution_Flag_%281952-1958%29.jpg', THREE.SphericalRefractionMapping) */
+    /*});
+    var marker2 = new THREE.Mesh(geometry2, material2);
+
+    marker2.userData = {
+        URL: "http://stackoverflow.com"
+    };
+    marker2.position.copy(label2.position);
+    scene.add(marker2);*/
+
+    //markerarry.push(marker1)
+    //markerarry.push(marker2)
+
+    //----------------
+    $(window).click(function(event) {
+        // the following line would stop any other event handler from firing
+        // (such as the mouse's TrackballControls)
+        // event.preventDefault();
+
+        const rect = renderer.domElement.getBoundingClientRect();
+        const left = event.clientX - rect.left;
+        const top = event.clientY - rect.top;
+
+        const x = (left / rect.width) * 2 - 1;
+        const y = -(top / rect.height) * 2 + 1;
+
+        const raycaster = new THREE.Raycaster();
+        raycaster.ray.origin.setFromMatrixPosition(camera.matrixWorld);
+        raycaster.ray.direction.set(x, y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
+
+        const intersects = raycaster.intersectObjects(marcadores, true);
+        if(intersects.length > 0){
+            alert(intersects[0].object.parent.name);
+            console.log(intersects[0].object.parent.name);
+        }
+
+    })
+    //-----------------------
+    $(window).resize(onResize);
+    //window.addEventListener('resize', onResize);
+    onResize();
+
+    $('body').append(renderer.domElement);
+
+    animate();
+
     }
-    render();
 
-    /*Movimiento de la cámara*/
+    function onResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
     function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
+    //  label.update();
+
+    requestAnimationFrame(animate);
+
+    controls.update();
+
+    renderer.render(scene, camera);
     }
-});
+})
