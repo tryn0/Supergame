@@ -17,7 +17,7 @@ canvas {
 /*IMPORTACION DE FUENTE SUPER MARIO PARA EL TITULO*/
 @font-face {
   font-family: 'supermario256';
-  src: url('./fonts/SuperMario256.ttf')  format('truetype');
+  src: url('../fonts/SuperMario256.ttf')  format('truetype');
 }
 
 /*CONTENEDOR DEL TITULO*/

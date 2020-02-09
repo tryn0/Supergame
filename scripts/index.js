@@ -1,7 +1,7 @@
-$(document).ready(function(){
-  
+$(document).ready(function () {
+
   //Evitar seleccionar texto
-  $('html').css('user-select','none');
+  $('html').css('user-select', 'none');
 
   //ARCOIRIS
   // VARIABLES
@@ -44,12 +44,20 @@ $(document).ready(function(){
   const addRandom = function (lineWidth) {
     return (boolRandom() ? -1 : 1) * Math.random() * lineWidth;
   }
-  const makeSparkle = ({cx, cy, radiusX, radiusY, endAngle, lineWidth, color}) => {
+  const makeSparkle = ({
+    cx,
+    cy,
+    radiusX,
+    radiusY,
+    endAngle,
+    lineWidth,
+    color
+  }) => {
     return {
       x: cx + radiusX * Math.cos(endAngle) + addRandom(lineWidth), // stay out in front
-      y: cy + radiusY * Math.sin(endAngle) + addRandom(lineWidth), 
-      opacity: 1, 
-      color, 
+      y: cy + radiusY * Math.sin(endAngle) + addRandom(lineWidth),
+      opacity: 1,
+      color,
       rad: Math.max(radius * Math.random() * DPR, 15)
     }
   }
@@ -57,36 +65,36 @@ $(document).ready(function(){
   // ANIMACION
   function animate(percent = 0) {
     const doneAnimatingIn = percent >= finish + arcStagger * colors.length; // ANIMACION DE LARCO IRIS
-    
+
     let width = window.innerWidth * DPR;
     let height = window.innerHeight * DPR;
-    
+
     const lineWidth = height * .5 / colors.length;
-    
+
     const cx = width / 2;
     const startCy = height + lineWidth * rainbowHeight + (height - colors.length * lineWidth) / 3;
-    
+
     const startRadiusX = width / 2 + colors.length * lineWidth * 2;
     const startRadiusY = height;
 
     let ctx = document.getElementById('rainbow').getContext('2d');
-    ctx.clearRect(0, 0, width, height);  
+    ctx.clearRect(0, 0, width, height);
     ctx.globalAlpha = 1;
     ctx.lineWidth = lineWidth;
-    
+
     for (let i = colors.length - 1; i > -1; i--) {
       const [colorLine, colorSparkle] = colors[i];
-      
-      const cy = startCy + i * (lineWidth / 2 - 1) ;
-      
+
+      const cy = startCy + i * (lineWidth / 2 - 1);
+
       // Making these "concentric" ellipses
       const radiusX = startRadiusX - i * lineWidth / 2;
       const radiusY = startRadiusY - i * lineWidth / 2;
-      
+
       const endAngle = tau * (percent - i * arcStagger) + start;
-      
+
       const angle = clamp(start, tau * finish + start, endAngle);
-      
+
       // DRAW ONE OF OUR ELLIPSE LINES
       // - One color of our rainbow
       ctx.beginPath();
@@ -104,26 +112,48 @@ $(document).ready(function(){
       );
       ctx.lineCap = "round";
       ctx.stroke();
-      ctx.closePath(); 
-      
-      
-      if (!doneAnimatingIn) { 
+      ctx.closePath();
+
+
+      if (!doneAnimatingIn) {
         // ADD: Animating in sparkles, follow the start of each color
         for (let j = 0; j < sparklesInPerStripe; j++) {
           sparkles.push(
-            makeSparkle({cx, cy, radiusX, radiusY, endAngle: angle, lineWidth, color: colorLine})
+            makeSparkle({
+              cx,
+              cy,
+              radiusX,
+              radiusY,
+              endAngle: angle,
+              lineWidth,
+              color: colorLine
+            })
           );
         }
       } else {
         // ADD: Normal sparkles after animating in
-        sparkles.push(makeSparkle({cx, cy, radiusX, radiusY, endAngle: Math.random() * Math.PI + Math.PI, lineWidth, color: boolRandom() ? '#fff' : colorSparkle}));
+        sparkles.push(makeSparkle({
+          cx,
+          cy,
+          radiusX,
+          radiusY,
+          endAngle: Math.random() * Math.PI + Math.PI,
+          lineWidth,
+          color: boolRandom() ? '#fff' : colorSparkle
+        }));
       }
     }
-    
+
     // IMPRIMIR DESTELLOS
     const nextSparkles = [];
     for (let i = 0, len = sparkles.length; i < len; i++) {
-      const {x, y, opacity, color, rad} = sparkles[i];
+      const {
+        x,
+        y,
+        opacity,
+        color,
+        rad
+      } = sparkles[i];
       ctx.beginPath();
       ctx.globalAlpha = opacity;
       ctx.fillStyle = color;
@@ -132,7 +162,7 @@ $(document).ready(function(){
       ctx.arc(x + rad, y + rad, rad, Math.PI, 3 * Math.PI / 2);
       ctx.arc(x + rad, y - rad, rad, Math.PI / 2, Math.PI);
       ctx.fill();
-      
+
       // Destellos de los destellos
       if (opacity > .2 && rad > .2) {
         nextSparkles.push({
@@ -145,7 +175,7 @@ $(document).ready(function(){
       }
     }
     sparkles = nextSparkles;
-    
+
     if (!doneAnimatingIn) {
       // Animacion del arcoiris
       requestAnimationFrame(function () {
@@ -160,7 +190,9 @@ $(document).ready(function(){
   }
 
   sizeCanvas();
-  requestAnimationFrame(function () {animate()});
+  requestAnimationFrame(function () {
+    animate()
+  });
   window.addEventListener('resize', sizeCanvas);
   //ACABA ARCOIRIS
 
@@ -170,21 +202,23 @@ $(document).ready(function(){
 
 
   //MUESTRA TEXTO ENCIMA DEL ARCOIRIS
-  var showText = function (target, message, index, interval) {   
+  var showText = function (target, message, index, interval) {
     if (index < message.length) {
       $(target).append(message[index++]);
-      setTimeout(function () { showText(target, message, index, interval); }, interval);
+      setTimeout(function () {
+        showText(target, message, index, interval);
+      }, interval);
     }
   }
-  setTimeout(function (){ showText("#div", "It's me! MARIO!", -1, 150); },3500);
-
-
+  //Cambiar título del juego
+  setTimeout(function () {
+    showText("#div", "It's me! MARIO!", -1, 150);
+  }, 3500);
 
 
 
   //CUANDO SE CLICA EN EL TITULO
-  $('#div').click(function(){
-    //$('body').append('<p style="color:white;">CLICADOOOOOOOO</p>');
-    window.location.href='./content/menu1.html';
+  $('#div').click(function () {
+    window.location.href = './content/principal.html';
   })
 });
