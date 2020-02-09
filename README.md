@@ -1,7 +1,7 @@
 # Supergame
 
 ### Contribuyentes
-- __[Esambino](https://codepen.io/Esambino/pen/Ahlxi)__ - Proyecto en CodePen, desde el cual partí para recrear el planeta tierra.
+- __[JSFiddle](https://jsfiddle.net/bp61hoyn/)__ - Código en JSFiddle, importantísimo para los marcadores para poder elegir los paises.
 - __[shalanah](https://codepen.io/shalanah/pen/ymRpPd)__ - Proyecto en CodePen, del que partí para hacer el arcoiris en canvas.
 
 ___
