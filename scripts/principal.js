@@ -1,105 +1,104 @@
 import * as THREE from 'https://threejsfundamentals.org/threejs/resources/threejs/r113/build/three.module.js';
 import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources/threejs/r113/examples/jsm/controls/OrbitControls.js';
-//import {GUI} from 'https://threejsfundamentals.org/threejs/../3rdparty/dat.gui.module.js';
 
 $(document).ready(function () {
     function _convertLatLonToVec3(lat, lon) {
-    lat = lat * Math.PI / 180.0;
-    lon = -lon * Math.PI / 180.0;
-    return new THREE.Vector3(
-        Math.cos(lat) * Math.cos(lon),
-        Math.sin(lat),
-        Math.cos(lat) * Math.sin(lon));
+        lat = lat * Math.PI / 180.0;
+        lon = -lon * Math.PI / 180.0;
+        return new THREE.Vector3(
+            Math.cos(lat) * Math.cos(lon),
+            Math.sin(lat),
+            Math.cos(lat) * Math.sin(lon));
     }
 
     function InfoBox(city, radius, domElement) {
-    this._screenVector = new THREE.Vector3(0, 0, 0);
+        this._screenVector = new THREE.Vector3(0, 0, 0);
 
-    this.position = _convertLatLonToVec3(city.lat, city.lng).multiplyScalar(radius);
+        this.position = _convertLatLonToVec3(city.lat, city.lng).multiplyScalar(radius);
 
-    // create html overlay box
-    this.box = document.createElement('div');
-    this.box.innerHTML = city.name;
-    this.box.className = "hudLabel";
+        // create html overlay box
+        this.box = document.createElement('div');
+        this.box.innerHTML = city.name;
+        this.box.className = "hudLabel";
 
-    this.domElement = domElement;
-    this.domElement.appendChild(this.box);
+        this.domElement = domElement;
+        this.domElement.appendChild(this.box);
 
     }
 
-    InfoBox.prototype.update = function() {
-    this._screenVector.copy(this.position);
-    this._screenVector.project(camera);
+    InfoBox.prototype.update = function () {
+        this._screenVector.copy(this.position);
+        this._screenVector.project(camera);
 
-    var posx = Math.round((this._screenVector.x + 1) * this.domElement.offsetWidth / 2);
-    var posy = Math.round((1 - this._screenVector.y) * this.domElement.offsetHeight / 2);
+        var posx = Math.round((this._screenVector.x + 1) * this.domElement.offsetWidth / 2);
+        var posy = Math.round((1 - this._screenVector.y) * this.domElement.offsetHeight / 2);
 
-    var boundingRect = this.box.getBoundingClientRect();
+        var boundingRect = this.box.getBoundingClientRect();
 
-    // update the box overlays position
-    this.box.style.left = (posx - boundingRect.width) + 'px';
-    this.box.style.top = posy + 'px';
+        // update the box overlays position
+        this.box.style.left = (posx - boundingRect.width) + 'px';
+        this.box.style.top = posy + 'px';
     };
 
     //--------------------------------
     function Marker() {
-    THREE.Object3D.call(this);
+        THREE.Object3D.call(this);
 
-    var radius = 0.005;
-    var sphereRadius = 0.02;
-    var height = 0.05;
+        var radius = 0.005;
+        var sphereRadius = 0.02;
+        var height = 0.05;
 
-    var material = new THREE.MeshPhongMaterial({
-        color: 0xDC143C
-    });
+        var material = new THREE.MeshPhongMaterial({
+            color: 0xDC143C
+        });
 
-    var cone = new THREE.Mesh(new THREE.ConeBufferGeometry(radius, height, 8, 1, true), material);
-    cone.position.y = height * 0.5;
-    cone.rotation.x = Math.PI;
+        var cone = new THREE.Mesh(new THREE.ConeBufferGeometry(radius, height, 8, 1, true), material);
+        cone.position.y = height * 0.5;
+        cone.rotation.x = Math.PI;
 
-    var sphere = new THREE.Mesh(new THREE.SphereBufferGeometry(sphereRadius, 16, 8), material);
-    sphere.position.y = height * 0.95 + sphereRadius;
+        var sphere = new THREE.Mesh(new THREE.SphereBufferGeometry(sphereRadius, 16, 8), material);
+        sphere.position.y = height * 0.95 + sphereRadius;
 
-    this.add(cone, sphere);
+        this.add(cone, sphere);
     }
     Marker.prototype = Object.create(THREE.Object3D.prototype);
 
     // ------ Earth object -------------------------------------------------
 
     function Earth(radius, texture, altura, agua) {
-    THREE.Object3D.call(this);
+        THREE.Object3D.call(this);
 
-    this.userData.radius = radius;
+        this.userData.radius = radius;
 
-    var earth = new THREE.Mesh(
-        new THREE.SphereBufferGeometry(radius, 300, 300),
-        new THREE.MeshPhongMaterial({
-            map: texture,
-            bumpMap: altura,
-            bumpScale: 0.025,
-            specularMap: agua
-        })
-    );
+        var earth = new THREE.Mesh(
+            new THREE.SphereBufferGeometry(radius, 300, 300),
+            new THREE.MeshPhongMaterial({
+                map: texture,
+                bumpMap: altura,
+                bumpScale: 0.025,
+                specularMap: agua
+            })
+        );
 
-    this.add(earth);
+        this.add(earth);
     }
     var marcadores = [];
     Earth.prototype = Object.create(THREE.Object3D.prototype);
 
-    Earth.prototype.createMarker = function(lat, lon, name) {
-    var marker = new Marker();
+    Earth.prototype.createMarker = function (lat, lon, name) {
+        var marker = new Marker();
 
-    var latRad = lat * (Math.PI / 180);
-    var lonRad = -lon * (Math.PI / 180);
-    var r = this.userData.radius;
-    this.userData.name = name;
+        var latRad = lat * (Math.PI / 180);
+        var lonRad = -lon * (Math.PI / 180);
+        var r = this.userData.radius;
+        this.userData.name = name;
 
-    marker.position.set(Math.cos(latRad) * Math.cos(lonRad) * r, Math.sin(latRad) * r, Math.cos(latRad) * Math.sin(lonRad) * r);
-    marker.rotation.set(0.0, -lonRad, latRad - Math.PI * 0.5);
-    marker.name = name;
+        marker.position.set(Math.cos(latRad) * Math.cos(lonRad) * r, Math.sin(latRad) * r, Math.cos(latRad) * Math.sin(lonRad) * r);
+        marker.rotation.set(0.0, -lonRad, latRad - Math.PI * 0.5);
+        marker.name = name;
 
-    this.add(marker);
-    marcadores.push(marker);
+        this.add(marker);
+        marcadores.push(marker);
     };
 
     // ------ Three.js code ------------------------------------------------
@@ -110,144 +109,148 @@ $(document).ready(function () {
     init();
 
     function init() {
-    scene = new THREE.Scene();
+        scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 100);
-    //camera.position.set(0.0, 1.5, 3.0);
-    camera.position.set(-1.60, 1.5, -1.3);
+        camera = new THREE.PerspectiveCamera(45, 4 / 3, 0.1, 100);
+        //camera.position.set(0.0, 1.5, 3.0);
+        camera.position.set(-1.60, 1.5, -1.3);
 
-    renderer = new THREE.WebGLRenderer({
-        antialias: true
-    });
+        renderer = new THREE.WebGLRenderer({
+            antialias: true
+        });
 
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.maxDistance = 4;
-    controls.minDistance = 2;
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.maxDistance = 4;
+        controls.minDistance = 2;
 
-    /*var ambient = new THREE.AmbientLight(0xffffff, 0.5);
-    scene.add(ambient);*/
+        /*var ambient = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambient);*/
 
-    var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(-350, 0, -200);
-    spotLight.castShadow = false; //If set to true light will cast dynamic shadows. Warning: This is expensive and requires tweaking to get shadows looking right.
-    spotLight.shadow.mapSize.width = 1024;
-    spotLight.shadow.mapSize.height = 1024;
-    spotLight.shadow.camera.near = 50;
-    spotLight.shadow.camera.far = 10000;
-    spotLight.shadow.camera.fov = 60;
-    scene.add(spotLight);
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(-350, 0, -200);
+        spotLight.castShadow = false; //If set to true light will cast dynamic shadows. Warning: This is expensive and requires tweaking to get shadows looking right.
+        spotLight.shadow.mapSize.width = 1024;
+        spotLight.shadow.mapSize.height = 1024;
+        spotLight.shadow.camera.near = 50;
+        spotLight.shadow.camera.far = 10000;
+        spotLight.shadow.camera.fov = 60;
+        scene.add(spotLight);
 
 
-    //Textura (imagen de la tierra)
-    var texture = new THREE.TextureLoader().load('../textures/tierra.jpg');
-    //Textura de agua y tierra
-    var agua = new THREE.TextureLoader().load('../textures/tierra-agua.png');
-    //Textura de elevación del terreno
-    var altura = new THREE.TextureLoader().load('../textures/altura.jpg');
+        //Textura (imagen de la tierra)
+        var texture = new THREE.TextureLoader().load('../textures/tierra.jpg');
+        //Textura de agua y tierra
+        var agua = new THREE.TextureLoader().load('../textures/tierra-agua.png');
+        //Textura de elevación del terreno
+        var altura = new THREE.TextureLoader().load('../textures/altura.jpg');
 
-    //Creación del planeta
-    var earth = new Earth(1.0, texture, altura, agua);
+        //Creación del planeta
+        var earth = new Earth(1.0, texture, altura, agua);
 
-    //Añadir marcador
-    earth.createMarker(35.683333, 139.683333, 'Tokio'); // Tokyo
+        //Añadir marcador
+        earth.createMarker(35.683333, 139.683333, 'Tokio'); // Tokyo
 
-    scene.add(earth);
+        scene.add(earth);
 
-    //-------------
-    // globe
+        //-------------
+        // globe
 
-    //var radius1 = 1;
+        //var radius1 = 1;
 
-    //var sphere1 = new THREE.Mesh(new THREE.SphereGeometry(radius1, 16, 16));
-    // scene.add( sphere1 );
+        //var sphere1 = new THREE.Mesh(new THREE.SphereGeometry(radius1, 16, 16));
+        // scene.add( sphere1 );
 
-    /*var city = {
-        "name": "Nader Hany",
-        "lat": 30,
-        "lng": 30
-    };*/
+        /*var city = {
+            "name": "Nader Hany",
+            "lat": 30,
+            "lng": 30
+        };*/
 
-    //var label = new InfoBox(city, radius1, document.body);
-    /*var material1 = new THREE.MeshPhongMaterial({
-        color: 0xDC143C
-    });
-    var marker1 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), material1);
-    marker1.userData = {
-        URL: "http://stackoverflow.com"
-    };
-    marker1.position.copy(label.position);
-    scene.add(marker1);
+        //var label = new InfoBox(city, radius1, document.body);
+        /*var material1 = new THREE.MeshPhongMaterial({
+            color: 0xDC143C
+        });
+        var marker1 = new THREE.Mesh(new THREE.SphereGeometry(0.05, 16, 16), material1);
+        marker1.userData = {
+            URL: "http://stackoverflow.com"
+        };
+        marker1.position.copy(label.position);
+        scene.add(marker1);
 
-    var city2 = {
-        "name": "Nader Hany",
-        "lat": 40,
-        "lng": 40
-    };*/
-    /*var label2 = new InfoBox(city2, radius1, document.body);
-    var geometry2 = new THREE.SphereGeometry(0.05, 16, 16);
-    var material2 = new THREE.MeshPhongMaterial({*/
+        var city2 = {
+            "name": "Nader Hany",
+            "lat": 40,
+            "lng": 40
+        };*/
+        /*var label2 = new InfoBox(city2, radius1, document.body);
+        var geometry2 = new THREE.SphereGeometry(0.05, 16, 16);
+        var material2 = new THREE.MeshPhongMaterial({*/
         /* map: THREE.ImageUtils.loadTexture('https://upload.wikimedia.org/wikipedia/commons/4/40/Egyptian_Revolution_Flag_%281952-1958%29.jpg', THREE.SphericalRefractionMapping) */
-    /*});
-    var marker2 = new THREE.Mesh(geometry2, material2);
+        /*});
+        var marker2 = new THREE.Mesh(geometry2, material2);
 
-    marker2.userData = {
-        URL: "http://stackoverflow.com"
-    };
-    marker2.position.copy(label2.position);
-    scene.add(marker2);*/
+        marker2.userData = {
+            URL: "http://stackoverflow.com"
+        };
+        marker2.position.copy(label2.position);
+        scene.add(marker2);*/
 
-    //markerarry.push(marker1)
-    //markerarry.push(marker2)
+        //markerarry.push(marker1)
+        //markerarry.push(marker2)
 
-    //----------------
-    $(window).click(function(event) {
-        // the following line would stop any other event handler from firing
-        // (such as the mouse's TrackballControls)
-        // event.preventDefault();
+        //----------------
+        $(window).click(function (event) {
+            // the following line would stop any other event handler from firing
+            // (such as the mouse's TrackballControls)
+            // event.preventDefault();
 
-        const rect = renderer.domElement.getBoundingClientRect();
-        const left = event.clientX - rect.left;
-        const top = event.clientY - rect.top;
+            const rect = renderer.domElement.getBoundingClientRect();
+            const left = event.clientX - rect.left;
+            const top = event.clientY - rect.top;
 
-        const x = (left / rect.width) * 2 - 1;
-        const y = -(top / rect.height) * 2 + 1;
+            const x = (left / rect.width) * 2 - 1;
+            const y = -(top / rect.height) * 2 + 1;
 
-        const raycaster = new THREE.Raycaster();
-        raycaster.ray.origin.setFromMatrixPosition(camera.matrixWorld);
-        raycaster.ray.direction.set(x, y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
+            const raycaster = new THREE.Raycaster();
+            raycaster.ray.origin.setFromMatrixPosition(camera.matrixWorld);
+            raycaster.ray.direction.set(x, y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
 
-        const intersects = raycaster.intersectObjects(marcadores, true);
-        if(intersects.length > 0){
-            alert(intersects[0].object.parent.name);
-            console.log(intersects[0].object.parent.name);
-        }
+            const intersects = raycaster.intersectObjects(marcadores, true);
+            if (intersects.length > 0) {
+                //alert(intersects[0].object.parent.name);
+                //console.log(intersects[0].object.parent.name);
+                if (confirm("¿Quieres viajar a Japón?")) {
+                    window.location.href = './mapa.html';
+                } else {
+                    return false;
+                }
+            }
 
-    })
-    //-----------------------
-    $(window).resize(onResize);
-    //window.addEventListener('resize', onResize);
-    onResize();
+        })
+        //-----------------------
+        $(window).resize(onResize);
+        onResize();
 
-    $('body').append(renderer.domElement);
+        $('body').append(renderer.domElement);
 
-    animate();
+        animate();
 
     }
 
     function onResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
     function animate() {
-    //  label.update();
+        //  label.update();
 
-    requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
 
-    controls.update();
+        controls.update();
 
-    renderer.render(scene, camera);
+        renderer.render(scene, camera);
     }
 })
