@@ -1,6 +1,6 @@
 # Supergame
 
-[Ver](https://tryn0.github.io/Supergame/juego.html)
+[Ver](https://tryn0.github.io/Supergame/)
 
 ### Contribuyentes
 - __[JSFiddle](https://jsfiddle.net/bp61hoyn/)__ - Código en JSFiddle, importantísimo para los marcadores para poder elegir los paises.
