@@ -1,9 +1,9 @@
 # Developer
 
 ### Para qué sirve
-Esta rama feature/clicarMapa es para añadir funcionalidad al evento de clicar sobre un marcador, en este caso sobre el marcador de Japón, que muestre el mapa de Japón, ya sea uno simple o el definitivo. Me gustaría poder añadirle la "barra" de progreso al cargar el mundo. (Animación de SVG con plugin Anime)
+Esta rama feature/clicarMapa es para añadir funcionalidad al evento de clicar sobre un marcador, en este caso sobre el marcador de Japón, que muestre el mapa de Japón, ya sea uno simple o el definitivo.
 
 ### Conseguido
-Al hacer clic sobre el marcador de Japón salta una alerta de confirmación preguntando si quieres ir a Japón, si le das a aceptar te redirecciona a mapa.html, si le das a cancelar se quita la alerta y se queda en principal.html (mundo)
+Al clicar en el marcador de Japón, pregunta si viajar a Japón, si se acepta redirecciona a mapa.html. Este contiene un objeto 3D con una textura del mapa de Japón. Contiene una ruta entre ciudades famosas, cada ciudad es un juego, si se clica en la pelota de la ciudad preguntará si se desea ir a esa ciudad, se se acepta cargará el juego.
 
 <p align="center">&copy; 2020 - tryn0</p>
