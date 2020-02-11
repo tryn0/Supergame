@@ -3,43 +3,16 @@ import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources
 
 $(document).ready(function(){
 
-    //NO SIRVE
-    /*$('#boton').click(function(){
-        $('#mapa').css({
-            'display' : 'block',
-            'position' : 'fixed',
-            'background-color' : 'rgba(0,0,0,0.5)',
-            'z-index' : '1',
-            'width' : '100%',
-            'height' : '100%'
-        });
-        $('#mapa>p').css('z-index','5');
-        $('#contenido').load('./principal.html');
-    });*///NO SIRVE
-
-
-    /*anime({
-        targets: '.line-drawing-demo .lines path',
-        strokeDashoffset: [anime.setDashoffset, 0],
-        easing: 'easeInOutSine',
-        duration: 1500,
-        delay: function(el, i) { return i * 250 },
-        direction: 'alternate',
-        loop: true
-    });*/
-
     //Creacion de la escena y el entorno
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight, 1,10000);
     var renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer = new THREE.WebGLRenderer({antialias: true});
 
-    //camera.position.set(0.0, 1.5, 3.0);
+    //Posicion de la cámara (x, y, z)
     camera.position.set(0, 0, 1000);
-
-    renderer = new THREE.WebGLRenderer({
-         antialias: true
-    });
+    
 
     //Controles de la cámara
     var controls = new OrbitControls(camera, renderer.domElement);
@@ -71,42 +44,62 @@ $(document).ready(function(){
 
     //Creacion de puntos
     var tokio = new THREE.Mesh( new THREE.SphereGeometry(10, 50, 50 ), new THREE.MeshBasicMaterial( {color: 0xffff00} ) );
-    tokio.position.set(335,-15,25);
+    tokio.position.set(335,-15,20);
     tokio.name = 'Tokio';
 
-    var hokkaido = new THREE.Mesh( new THREE.SphereGeometry(10, 50, 50 ), new THREE.MeshBasicMaterial( {color: 0xffff00} ) );
-    hokkaido.position.set(200,400,25);
-    hokkaido.name = 'Hokkaido';
-    hokkaido.color = 'grey';
-
     var tokio2 = new THREE.Mesh( new THREE.SphereGeometry(10, 50, 50 ), new THREE.MeshBasicMaterial( {color: 0xffff00} ) );
-    tokio2.position.set(-335,-15,-25);
+    tokio2.position.set(-335,-15,-20);
     tokio2.name = 'Tokio';
 
+    var hokkaido = new THREE.Mesh( new THREE.SphereGeometry(10, 50, 50 ), new THREE.MeshBasicMaterial( {color: 0xffff00} ) );
+    hokkaido.position.set(200,400,20);
+    hokkaido.name = 'Hokkaido';
+    hokkaido.color = 'grey';   
+
     var hokkaido2 = new THREE.Mesh( new THREE.SphereGeometry(10, 50, 50 ), new THREE.MeshBasicMaterial( {color: 0xffff00} ) );
-    hokkaido2.position.set(-200,400,-25);
+    hokkaido2.position.set(-200,400,-20);
     hokkaido2.name = 'Hokkaido';
 
+    var kioto = new THREE.Mesh(new THREE.SphereGeometry(10, 50, 50), new THREE.MeshBasicMaterial({color: 0xffff00}));
+    kioto.position.set(15,-150,20);
+    kioto.name = 'Kioto';
+
+    var kioto2 = new THREE.Mesh(new THREE.SphereGeometry(10, 50, 50), new THREE.MeshBasicMaterial({color: 0xffff00}));
+    kioto2.position.set(-15,-150,-20);
+    kioto2.name = 'Kioto';
+
     //Añadir puntos a lista para luego poder hacer click con raycaster
-    niveles.push(tokio, tokio2, hokkaido, hokkaido2);
+    niveles.push(tokio, tokio2, hokkaido, hokkaido2, kioto, kioto2);
 
     //Añadir puntos a la escena (pantalla)
-    scene.add(cube,tokio,hokkaido, tokio2, hokkaido2);
+    scene.add(cube,tokio,tokio2, hokkaido, hokkaido2, kioto, kioto2);
 
 
     //Creacion de líneas, cara1 (de frente)
     var lineGeometry = new THREE.Geometry();
-    lineGeometry.vertices.push( new THREE.Vector3(335,-15,26), new THREE.Vector3(200,400,26) );
-    var lineMaterial = new THREE.LineBasicMaterial( { color: 'red',linewidth: 5 } );
-    var line = new THREE.Line( lineGeometry, lineMaterial );
+    lineGeometry.vertices.push(new THREE.Vector3(335,-15,20), new THREE.Vector3(200,400,20));
+    var lineMaterial = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line = new THREE.Line(lineGeometry, lineMaterial);
     scene.add(line);
 
-    //Creacion de líneas, cara2 (de espalda)
     var lineGeometry2 = new THREE.Geometry();
-    lineGeometry2.vertices.push( new THREE.Vector3(-335,-15,-26), new THREE.Vector3(-200,400,-26) );
-    var lineMaterial2 = new THREE.LineBasicMaterial( { color: 'red',linewidth: 5 } );
-    var line2 = new THREE.Line( lineGeometry2, lineMaterial2 );
+    lineGeometry2.vertices.push(new THREE.Vector3(15,-150,20), new THREE.Vector3(335,-15,20));
+    var lineMaterial2 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line2 = new THREE.Line(lineGeometry2, lineMaterial2);
     scene.add(line2);
+
+    //Creacion de líneas, cara2 (de espalda)
+    var lineGeometry3 = new THREE.Geometry();
+    lineGeometry3.vertices.push(new THREE.Vector3(-335,-15,-20), new THREE.Vector3(-200,400,-20));
+    var lineMaterial3 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line3 = new THREE.Line(lineGeometry3, lineMaterial3);
+    scene.add(line3);
+
+    var lineGeometry4 = new THREE.Geometry();
+    lineGeometry4.vertices.push(new THREE.Vector3(-15,-150,-20), new THREE.Vector3(-335,-15,-20));
+    var lineMaterial3 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line4 = new THREE.Line(lineGeometry4, lineMaterial3);
+    scene.add(line4);
 
     
     //Funcion que renderiza 60 veces por segundo la scene y camera, la pantalla vaya, 60fps
@@ -150,6 +143,13 @@ $(document).ready(function(){
                 case 'Hokkaido':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
                         window.location.href = './hokkaido.html';
+                    }else{
+                        return false;
+                    }
+                    break;
+                case 'Kioto':
+                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
+                        window.location.href = './kioto.html';
                     }else{
                         return false;
                     }
