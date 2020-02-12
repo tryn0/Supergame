@@ -34,9 +34,9 @@ $(document).ready(function(){
 
     //Creacion del objeto del mapa
     var geometry = new THREE.BoxGeometry(1300, 1470, 25, 1, 1, 1);
-    var svg = new THREE.TextureLoader().load('../images/mapa_japon.png');
+    var mapa = new THREE.TextureLoader().load('../images/mapa_japon.png');
     var material = new THREE.MeshBasicMaterial({
-        map: svg
+        map: mapa
     });
     var cube = new THREE.Mesh(geometry, material);
 
@@ -76,12 +76,14 @@ $(document).ready(function(){
 
 
     //Creacion de líneas, cara1 (de frente)
+    //Tokio - Hokkaido
     var lineGeometry = new THREE.Geometry();
     lineGeometry.vertices.push(new THREE.Vector3(335,-15,20), new THREE.Vector3(200,400,20));
     var lineMaterial = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
     var line = new THREE.Line(lineGeometry, lineMaterial);
     scene.add(line);
 
+    //Kioto - Tokio
     var lineGeometry2 = new THREE.Geometry();
     lineGeometry2.vertices.push(new THREE.Vector3(15,-150,20), new THREE.Vector3(335,-15,20));
     var lineMaterial2 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
@@ -89,12 +91,14 @@ $(document).ready(function(){
     scene.add(line2);
 
     //Creacion de líneas, cara2 (de espalda)
+    //Tokio - Hokkaido
     var lineGeometry3 = new THREE.Geometry();
     lineGeometry3.vertices.push(new THREE.Vector3(-335,-15,-20), new THREE.Vector3(-200,400,-20));
     var lineMaterial3 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
     var line3 = new THREE.Line(lineGeometry3, lineMaterial3);
     scene.add(line3);
 
+    //Kioto - Tokio
     var lineGeometry4 = new THREE.Geometry();
     lineGeometry4.vertices.push(new THREE.Vector3(-15,-150,-20), new THREE.Vector3(-335,-15,-20));
     var lineMaterial3 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
@@ -108,6 +112,46 @@ $(document).ready(function(){
         renderer.render(scene, camera);
     }
     render();
+
+    //Lista para los botones
+    var botones = [];
+
+    //Botón 1 en 3D
+    var formaBoton = new THREE.BoxGeometry(200, 100, 10);
+    const loader = new THREE.TextureLoader();
+    //Texturas de las 6 caras boton 1
+    const texturas = [
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({map: loader.load('../images/salida.png'),transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1})
+    ];
+    var boton = new THREE.Mesh(formaBoton, texturas);
+    boton.name = 'Salir';
+    boton.position.set(350,-550,7.51);
+
+    //Botón 2 en 3D
+    var formaBoton2 = new THREE.BoxGeometry(200, 100, 10);
+    //Texturas de las 6 caras boton 2
+    const texturas2 = [
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({transparent: 1}),
+        new THREE.MeshBasicMaterial({map: loader.load('../images/salida.png'),transparent: 1})
+    ];    
+    var boton2 = new THREE.Mesh(formaBoton2, texturas2);
+    boton2.name = 'Salir';
+    boton2.position.set(-350,-550,-7.51);
+
+    //Botones añadidos a la escena
+    scene.add(boton, boton2);
+
+    //Añadido a la lista de botones para cuando pulse en alguno
+    botones.push(boton, boton2);
 
 
     //Comprueba al hacer click si lo que has clicado está en la lista niveles
@@ -129,6 +173,7 @@ $(document).ready(function(){
         raycaster.ray.direction.set(x, y, 0.5).unproject(camera).sub(raycaster.ray.origin).normalize();
 
         const intersects = raycaster.intersectObjects(niveles, true);
+        const salida = raycaster.intersectObjects(botones, true);
         if (intersects.length > 0){
             switch(intersects[0].object.name){
                 //Si su nombre es tokio
@@ -154,6 +199,17 @@ $(document).ready(function(){
                         return false;
                     }
                     break;
+            }
+        }else if (salida.length > 0){
+            switch(salida[0].object.name){
+                //Si se ha clicado a los botones con nombre Salir
+                case 'Salir':
+                    if (confirm("¿Segur@ que quieres salir?")) {
+                        window.location.href = './salida.html';
+                    }else{
+                        return false;
+                    }
+                  break;
             }
         }
     });
