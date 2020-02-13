@@ -179,7 +179,7 @@ $(document).ready(function(){
                 //Si su nombre es tokio
                 case 'Tokio':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
-                        window.location.href = '../juego.html';
+                        window.location.href = '../sushigame.html';
                     }else{
                         return false;
                     }
