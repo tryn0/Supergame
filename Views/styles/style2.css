@@ -1,0 +1,59 @@
+#pantallaInicio{
+	background-position: center;
+  	background-repeat: no-repeat;
+  	background-size: cover;
+}
+
+#sombreado{
+	padding: 20px;
+	background-color: rgb(154, 161, 165,0.5);
+}
+
+
+/*PRIMERA PANTALLA DE JUEGO*/
+@font-face {
+  font-family: "upheavtt";
+  src: url("../fonts/upheavtt.ttf");
+}
+
+html{
+	cursor:url("../images/p1.png") 30 30,auto;
+}
+html:active{
+	cursor:url("../images/p2.png") 30 30,auto;
+}
+
+
+body{
+	overflow: hidden;
+	background-color: skyblue ;
+    font-family: "upheavtt";
+}
+#puntuacion{
+	font-size: 2em;
+	letter-spacing: 2px;
+	position: relative;
+	bottom: 20px;
+}
+
+#fondo{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+}
+#vida1,#vida2,#vida3{
+	width: 50px;
+	height: 50px;
+}
+#vidas{
+	position: absolute;
+	top: 25px;
+	right: 15px;
+}
+
+#trayectoria{
+	/*background-color: red;*/
+	width: 100%;
+	height: 400px;
+}
