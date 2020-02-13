@@ -9,6 +9,7 @@
 	<meta charset="utf-8">
 </head>
 <body>
+	<p><?php echo $_SESSION['sushiGame']; ?></p>
 	<p><?php echo $_SESSION['mensaje']; ?></p>
 </body>
 </html>

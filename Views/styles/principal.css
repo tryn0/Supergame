@@ -14,7 +14,3 @@ canvas{
     min-width: 100%;
     max-width: 100%;
 }
-svg{
-    position: absolute;
-    z-index: 9999;
-}

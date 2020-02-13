@@ -81,18 +81,17 @@ $(document).ready(function(){
 			}
 		}
 		function mandarPuntos(){
-			console.log($("#puntos").text());
-			var puntos = { puntitos: parseInt($("#puntos").text())};
-	       // var parametros = puntos;
-	        var ajax = $.ajax({
-	                url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
-	                type:  'post', //método de envio
-	                data: puntos, //datos que se envian a traves de ajax
-	                success:  function(data){ //una vez que el archivo recibe el request lo procesa y lo devuelve
-						window.location.replace('../Controllers/finalJuego.php')
-	                }
-
-			});
-		}
+            var puntos = { puntitos: parseInt($("#puntos").text())};
+           // var parametros = puntos;
+            $.ajax({
+                    url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
+                    type:  'post', //método de envio
+                    data: puntos, //datos que se envian a traves de ajax
+                    success:  function (data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                        alert("acabó "+ data);
+                        window.location.replace('../Controllers/finalJuego.php')
+                    }
+            });
+        }
 	});
 });
