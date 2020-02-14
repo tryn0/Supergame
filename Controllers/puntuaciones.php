@@ -20,8 +20,12 @@
 	if(!empty($sonic)){
 		$niveles[] = $sonic;
 	}
+
+	var_dump($niveles);
+	var_dump($sushi);
+	//$_SESSION['puntuacionTotal'] = ;
 	
-	if (empty($_SESSION['sushiGame'])) {
+	/*if (empty($_SESSION['sushiGame'])) {
 		$_SESSION['sushiGame'] = $sushi;
 		$_SESSION['mensaje'] = "¡Enhorabuena! Has conseguido " . $_SESSION['sushiGame'] . " puntos.";
 	} elseif ($_SESSION['sushiGame'] < $sushi) {
@@ -29,5 +33,11 @@
 		$_SESSION['sushiGame'] = $sushi;
 	} else {
 		$_SESSION['mensaje'] = "Has conseguido " . $sushi . " puntos. No has superado tu anterior record de " . $_SESSION['sushiGame'] . " puntos.";
+	}*/
+	$puntoTotal = 0;
+	for ($i=0; $i < count($niveles) ; $i++) { 
+		$puntoTotal += $niveles[$i];
 	}
+	var_dump($_POST);
+	$_SESSION['puntuacionTotal'] = $puntoTotal;
 ?>

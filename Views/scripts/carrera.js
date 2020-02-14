@@ -1,5 +1,18 @@
-$(document).ready(function () {
-  $(function () {
+  $(function(){
+    //Mandar los puntos por ajax
+    function mandarPuntos(){
+      var puntuacion = { puntosCarrera: puntos};
+      $.ajax({
+        url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
+        type:  'post', //método de envio
+        data: puntuacion, //datos que se envian a traves de ajax
+        success:  function () { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            window.location.replace('../Controllers/finalJuego.php');
+            //console.log(puntuacion);
+        }
+      });
+    }
+
     var jinete = $("#jinete");
     var anchodiv = $("#carrera").width();
     var id;
@@ -22,7 +35,7 @@ $(document).ready(function () {
       if (e.which == 32) {
         // si la posicion de mi jinete es menor que el ancho del div de la carrera que siga
         if (posicion <= anchodiv - 100) {
-          jinete.css('left', parseInt(jinete.css('left')) + 500);
+          jinete.css('left', parseInt(jinete.css('left')) + 400);
           //si supera el ancho, ya ha llegado a la meta
         } else {
           // segun los segundos se puntua
@@ -46,7 +59,10 @@ $(document).ready(function () {
           parar();
           // le quito el evento de pulsar para que no pueda seguir ejecutandose
           $(document).off("keyup");
-
+          $('#volver').click(function(){
+            mandarPuntos();
+          })
+          
         }
         // me creo la marcha atras del caballo cada segundo cada vez que levante la tecla
         id = setTimeout(function () {
@@ -89,9 +105,8 @@ $(document).ready(function () {
     }, 1000);
 
 
-  }
-  // parar el cronometro
-  function parar() {
-    clearInterval(tiempo_corriendo);
-  }
-});
+}
+// parar el cronometro
+function parar() {
+  clearInterval(tiempo_corriendo);
+}

@@ -9,6 +9,6 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<p><?php echo $_SESSION['mensaje']; ?></p>
+	<p><?php echo $_SESSION['puntuacionTotal']; ?></p>
 </body>
 </html>
