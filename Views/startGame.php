@@ -11,8 +11,8 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="../Views/scripts/pantallaInicioFin.js"></script>
 
-        <!--Queda poner fuente y mejorar lo que no guste al equipo-->
-        <title>Jugador</title>
+        <!--Login-->
+        <title>Login</title>
     </head>
     <body class="h-100" id="pantallaInicio" background="../Views/images/principal.jpg" style="background-size: 100% 100%;">
         <div class="container h-100">
@@ -39,6 +39,7 @@
                         </div>
                         <button type="submit" name="enviarJugador" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Empezar a jugar">Empezar</button>
                     </form>
+                    <?php if(!empty($error)){echo $error;} ?>
                 </div>
             </div>
         </div>        

@@ -81,7 +81,7 @@ $(document).ready(function(){
 			}
 		}
 		function mandarPuntos(){
-            var puntos = { puntosJugador: parseInt($("#puntos").text())};
+            var puntos = { puntosSushi: parseInt($("#puntos").text())};
             $.ajax({
                     url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
                     type:  'post', //método de envio

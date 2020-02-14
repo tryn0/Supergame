@@ -1,6 +1,26 @@
 <?php
 	session_start();
-	$sushi = $_POST['puntosJugador'];
+
+	$sushi = $_POST['puntosSushi'];
+	$carrera = $_POST['puntosCarrera'];
+	$memory = $_POST['puntosMemory'];
+	$sonic = $_POST['puntosSonic'];
+
+	$niveles = [];
+
+	if(!empty($sushi)){
+		$niveles[] = $sushi;
+	}
+	if(!empty($carrera)){
+		$niveles[] = $carrera;
+	}
+	if(!empty($memory)){
+		$niveles[] = $memory;
+	}
+	if(!empty($sonic)){
+		$niveles[] = $sonic;
+	}
+	
 	if (empty($_SESSION['sushiGame'])) {
 		$_SESSION['sushiGame'] = $sushi;
 		$_SESSION['mensaje'] = "¡Enhorabuena! Has conseguido " . $_SESSION['sushiGame'] . " puntos.";

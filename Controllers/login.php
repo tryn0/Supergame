@@ -6,12 +6,16 @@
 
 	if(!empty($_POST['jugador'])){
 		$usuario = Usuario::comprobarUser($_POST['jugador']);
-		if(!$usuario) {
+		if(!$usuario && !empty($_POST['curso'])) {
 			$_SESSION['user'] = $usuario;
 			$_SESSION['curso'] = $_POST['curso'];
 			header("location: ../Views/content/mapa.html");
 		} else {
-			$error = "El usuario ya existe";
+			if(empty($_POST['curso'])){
+				$error = 'Selecciona un curso';
+			}else{
+				$error = 'El usuario ya existe';
+			}
 		}
 	}
 	$data['cursos'] = Curso::getCursos();

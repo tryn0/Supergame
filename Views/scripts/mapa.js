@@ -209,7 +209,7 @@ $(document).ready(function(){
                 //Si su nombre es hokkaido
                 case 'Hokkaido':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
-                        window.location.href = '../hokkaido.html';
+                        window.location.href = '../memory.html';
                     }else{
                         return false;
                     }
@@ -223,7 +223,7 @@ $(document).ready(function(){
                     break;
                 case 'Fukuoka':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
-                        window.location.href = '../memory.html';
+                        window.location.href = '../carrera.html';
                     }else{
                         return false;
                     }
