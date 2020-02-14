@@ -234,7 +234,7 @@ $(document).ready(function(){
                 //Si se ha clicado a los botones con nombre Salir
                 case 'Salir':
                     if (confirm("¿Segur@ que quieres salir?")) {
-                        window.location.href = './salida.html';
+                        window.location.href = '../../Controllers/insertranking.php';
                     }else{
                         return false;
                     }
