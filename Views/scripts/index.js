@@ -212,7 +212,7 @@ $(document).ready(function () {
   }
   //Cambiar título del juego
   setTimeout(function () {
-    showText("#div", "It's me! MARIO!", -1, 150);
+    showText("#div", "Supergame", -1, 150);
   }, 3500);
 
 

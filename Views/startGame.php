@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!--Bootstrap-->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="../Views/styles/style.css">
+        <link rel="stylesheet" type="text/css" href="../Views/styles/startGame.css">
 
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="../Views/scripts/pantallaInicioFin.js"></script>
@@ -17,12 +17,12 @@
     <body class="h-100" id="pantallaInicio" background="../Views/images/principal.jpg" style="background-size: 100% 100%;">
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center" >
-                <div class="col-4 col-md-4 col-lg-6 col-xl-5" id="sombreado">
+                <div class="col-4 col-md-4 col-lg-6 col-xl-5 pt-1 pb-1" id="sombreado">
                     <form method="POST" class="justify-content-center">
-                        <div class="form-group">
+                        <div class="form-group" id="texto">
                             <label for="jugador">Jugador o grupo:</label>
                             <input class="form-control" type="text" name="jugador" id="jugador" placeholder="Nombre del jugador">
-                            <small class="form-text text-muted">Distinto para cada persona.</small>
+                            <small class="form-text text-white">Distinto para cada persona.</small>
                         </div>
                         <div class="form-group">
                             <label for="curso">Curso:</label>

@@ -1,7 +1,9 @@
 <?php
 	session_start();
+	
 	require_once '../Models/Usuario.php';
 	require_once '../Models/Curso.php';
+
 	if(!empty($_POST['jugador'])){
 		$usuario = Usuario::comprobarUser($_POST['jugador']);
 		if(!$usuario) {

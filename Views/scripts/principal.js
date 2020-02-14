@@ -3,7 +3,7 @@ import { OrbitControls } from 'https://threejsfundamentals.org/threejs/resources
 
 $(document).ready(function(){   
     //Funcion para convertir latitud y longitud en Vector3
-    //necesario para color los marcadores e infobox en una esfera
+    //necesario para colocar los marcadores e infobox en una esfera (tierra)
     function _convertLatLonToVec3(lat, lon) {
         lat = lat * Math.PI / 180.0;
         lon = -lon * Math.PI / 180.0;

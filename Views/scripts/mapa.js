@@ -68,11 +68,19 @@ $(document).ready(function(){
     kioto2.position.set(-15,-150,-20);
     kioto2.name = 'Kioto';
 
+    var fukuoka = new THREE.Mesh(new THREE.SphereGeometry(10, 50, 50), new THREE.MeshBasicMaterial({color: 0xffff00}));
+    fukuoka.position.set(-400,-400,20);
+    fukuoka.name = 'Fukuoka';
+
+    var fukuoka2 = new THREE.Mesh(new THREE.SphereGeometry(10, 50, 50), new THREE.MeshBasicMaterial({color: 0xffff00}));
+    fukuoka2.position.set(400,-400,-20);
+    fukuoka2.name = 'Fukuoka';
+
     //Añadir puntos a lista para luego poder hacer click con raycaster
-    niveles.push(tokio, tokio2, hokkaido, hokkaido2, kioto, kioto2);
+    niveles.push(tokio, tokio2, hokkaido, hokkaido2, kioto, kioto2, fukuoka, fukuoka2);
 
     //Añadir puntos a la escena (pantalla)
-    scene.add(cube,tokio,tokio2, hokkaido, hokkaido2, kioto, kioto2);
+    scene.add(cube,tokio,tokio2, hokkaido, hokkaido2, kioto, kioto2, fukuoka, fukuoka2);
 
 
     //Creacion de líneas, cara1 (de frente)
@@ -90,6 +98,13 @@ $(document).ready(function(){
     var line2 = new THREE.Line(lineGeometry2, lineMaterial2);
     scene.add(line2);
 
+    //Kioto - Fukuoka
+    var lineGeometry6 = new THREE.Geometry();
+    lineGeometry6.vertices.push(new THREE.Vector3(15,-150,20), new THREE.Vector3(-400,-400,20));
+    var lineMaterial6 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line6 = new THREE.Line(lineGeometry6, lineMaterial6);
+    scene.add(line6);
+
     //Creacion de líneas, cara2 (de espalda)
     //Tokio - Hokkaido
     var lineGeometry3 = new THREE.Geometry();
@@ -101,9 +116,16 @@ $(document).ready(function(){
     //Kioto - Tokio
     var lineGeometry4 = new THREE.Geometry();
     lineGeometry4.vertices.push(new THREE.Vector3(-15,-150,-20), new THREE.Vector3(-335,-15,-20));
-    var lineMaterial3 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
-    var line4 = new THREE.Line(lineGeometry4, lineMaterial3);
+    var lineMaterial4 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line4 = new THREE.Line(lineGeometry4, lineMaterial4);
     scene.add(line4);
+
+    //Kioto - Fukuoka
+    var lineGeometry5 = new THREE.Geometry();
+    lineGeometry5.vertices.push(new THREE.Vector3(-15,-150,-20), new THREE.Vector3(400,-400,-20));
+    var lineMaterial5 = new THREE.LineBasicMaterial({color: 'red',linewidth: 5});
+    var line5 = new THREE.Line(lineGeometry5, lineMaterial5);
+    scene.add(line5);
 
     
     //Funcion que renderiza 60 veces por segundo la scene y camera, la pantalla vaya, 60fps
@@ -187,14 +209,21 @@ $(document).ready(function(){
                 //Si su nombre es hokkaido
                 case 'Hokkaido':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
-                        window.location.href = './hokkaido.html';
+                        window.location.href = '../hokkaido.html';
                     }else{
                         return false;
                     }
                     break;
                 case 'Kioto':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
-                        window.location.href = './kioto.html';
+                        window.location.href = '../kioto.html';
+                    }else{
+                        return false;
+                    }
+                    break;
+                case 'Fukuoka':
+                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
+                        window.location.href = '../memory.html';
                     }else{
                         return false;
                     }

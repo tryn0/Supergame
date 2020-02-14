@@ -81,14 +81,12 @@ $(document).ready(function(){
 			}
 		}
 		function mandarPuntos(){
-            var puntos = { puntitos: parseInt($("#puntos").text())};
-           // var parametros = puntos;
+            var puntos = { puntosJugador: parseInt($("#puntos").text())};
             $.ajax({
                     url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
                     type:  'post', //método de envio
                     data: puntos, //datos que se envian a traves de ajax
-                    success:  function (data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                        alert("acabó "+ data);
+                    success:  function () { //una vez que el archivo recibe el request lo procesa y lo devuelve
                         window.location.replace('../Controllers/finalJuego.php')
                     }
             });
