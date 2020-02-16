@@ -200,7 +200,7 @@ $(document).ready(function(){
             switch(intersects[0].object.name){
                 //Si su nombre es tokio
                 case 'Tokio':
-                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
+                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"? Jugarás a SushiGame")) {
                         window.location.href = '../sushigame.html';
                     }else{
                         return false;
@@ -208,21 +208,21 @@ $(document).ready(function(){
                   break;
                 //Si su nombre es hokkaido
                 case 'Hokkaido':
-                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
+                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"? Jugarás a Memory")) {
                         window.location.href = '../memory.html';
                     }else{
                         return false;
                     }
                     break;
                 case 'Kioto':
-                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
+                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"? Jugarás a Goku Jump")) {
                         window.location.href = '../kioto.html';
                     }else{
                         return false;
                     }
                     break;
                 case 'Fukuoka':
-                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"?")) {
+                    if (confirm("¿Quieres viajar a "+intersects[0].object.name+"? Jugarás a Carrera")) {
                         window.location.href = '../carrera.html';
                     }else{
                         return false;
@@ -233,8 +233,8 @@ $(document).ready(function(){
             switch(salida[0].object.name){
                 //Si se ha clicado a los botones con nombre Salir
                 case 'Salir':
-                    if (confirm("¿Segur@ que quieres salir?")) {
-                        window.location.href = './salida.html';
+                    if (confirm("Estas finalizando tu partida. ¿Segur@ que quieres salir?")) {
+                        window.location.href = '../Controllers/insertranking.php';
                     }else{
                         return false;
                     }

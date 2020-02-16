@@ -3,12 +3,11 @@
     function mandarPuntos(){
       var puntuacion = { puntosCarrera: puntos};
       $.ajax({
-        url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
+        url:   '../Controllers/puntuacionCarrera.php', //archivo que recibe la peticion
         type:  'post', //método de envio
         data: puntuacion, //datos que se envian a traves de ajax
         success:  function () { //una vez que el archivo recibe el request lo procesa y lo devuelve
-            window.location.replace('../Controllers/finalJuego.php');
-            //console.log(puntuacion);
+            window.location.replace("../Views/content/mapa.html");
         }
       });
     }

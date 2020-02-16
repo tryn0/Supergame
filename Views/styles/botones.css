@@ -1,0 +1,219 @@
+/*Pone todos los botones en mayuscula*/
+.retro-boton {
+  text-transform: uppercase;
+  background: 0 0;
+}
+/*boton largo*/
+.retro-boton.lg .boton {
+  width: 294px;
+  height: 54px;
+  font-size: 17px;
+  line-height: 50px;
+}
+.retro-boton.lg .boton .boton-inner .content-wrapper .boton-content .boton-content-inner:before {
+  padding-top: 0;
+  letter-spacing: .15em;
+}
+/*boton pequeño*/
+.retro-boton.sm .boton {
+  width: 165px;
+  height: 37px;
+  font-size: 10.5px;
+  line-height: 32.5px;
+}
+
+.retro-boton.sm .boton .boton-inner .content-wrapper .boton-content .boton-content-inner:before {
+  padding-top: 0;
+}
+/*juego de colores para los botones*/
+.retro-boton.primary .boton .boton-inner .content-wrapper:before {
+  background-color: #051D41;
+}
+.retro-boton.primary .boton .boton-inner .content-wrapper .boton-content {
+  background-color: #0d47a1;
+}
+.retro-boton.secondary .boton .boton-inner .content-wrapper:before {
+  background-color: #263238;
+}
+.retro-boton.secondary .boton .boton-inner .content-wrapper .boton-content {
+  background-color: #37474F;
+}
+.retro-boton.danger .boton .boton-inner .content-wrapper:before {
+  background-color: #590000;
+}
+.retro-boton.danger .boton .boton-inner .content-wrapper .boton-content {
+  background-color: #CC0000;
+}
+.retro-boton.warning .boton .boton-inner .content-wrapper:before {
+  background-color: #6A3800;
+}
+.retro-boton.warning .boton .boton-inner .content-wrapper .boton-content {
+  background-color: #FF8800;
+}
+.retro-boton.success .boton .boton-inner .content-wrapper:before {
+  background-color: #00481F;
+}
+.retro-boton.success .boton .boton-inner .content-wrapper .boton-content {
+  background-color: #009A3E;
+}
+.retro-boton.info .boton .boton-inner .content-wrapper:before {
+  background-color: #164E62;
+}
+.retro-boton.info .boton .boton-inner .content-wrapper .boton-content {
+  background-color: #33b5e5;
+}
+/*IMPORTANTE no borrar*/
+.retro-boton .boton {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 3px;
+  position: relative;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: 0;
+  text-rendering: auto;
+  text-decoration: none;
+  text-align: center;
+  -webkit-transition: opacity .1s ease-out;
+  transition: opacity .1s ease-out;
+  z-index: 5;
+  -webkit-font-smoothing: antialiased;
+  width: 240px;
+  height: 46px;
+  font-size: 12px;
+  line-height: 24px;
+  background-color: transparent;
+  text-decoration-color: initial;
+  border-color: initial;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*sombreado*/
+.retro-boton .boton:before {
+  content: " ";
+  background-color: rgba(13, 13, 13, 0.3);
+  width: calc(100% - 2px);
+  height: calc(100% - 4px);
+  bottom: -1px;
+  left: 1px;
+  position: absolute;
+  border-radius: 3px;
+  z-index: 1;
+  -webkit-transition: background .12s ease-out, -webkit-transform .12s ease-out;
+  transition: background .12s ease-out, -webkit-transform .12s ease-out;
+  transition: transform .12s ease-out, background .12s ease-out;
+  transition: transform .12s ease-out, background .12s ease-out, -webkit-transform .12s ease-out;
+}
+
+/*animaciones de ladeado*/
+.retro-boton .boton.boton-left .boton-content {
+  -webkit-transform: skewY(-1deg);
+  transform: skewY(-1deg);
+}
+.retro-boton .boton.boton-right .boton-content {
+  -webkit-transform: skewY(1deg);
+  transform: skewY(1deg);
+}
+
+/*Animación al pulsar*/
+.retro-boton .boton.boton-active .boton-inner .content-wrapper .boton-content {
+  -webkit-transition: background .12s ease-out,color .12s ease-out,-webkit-transform .12s ease-out;
+  transition: background .12s ease-out,color .12s ease-out,-webkit-transform .12s ease-out;
+  transition: transform .12s ease-out,background .12s ease-out,color .12s ease-out;
+  transition: transform .12s ease-out,background .12s ease-out,color .12s ease-out,-webkit-transform .12s ease-out;
+  -webkit-transform: translate3d(0, 2px, 0);
+  transform: translate3d(0, 2px, 0);
+}
+
+/*Borde inferior de los botones. Es lo que hace que tenga la visualización como si estuviera saliente.*/
+.retro-boton .boton .boton-inner .content-wrapper:after, .retro-boton .boton .boton-inner .content-wrapper:before, .retro-boton .boton .boton-inner .content-wrapper .boton-content:after, .retro-boton .boton .boton-inner .content-wrapper .boton-content:before, .retro-boton .boton .boton-inner .content-wrapper .boton-content .boton-content-inner:before {
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.retro-boton .boton .boton-inner .content-wrapper:before {
+  background-image: initial;
+  background-color: #004d40;
+  content: " ";
+  border-radius: 3px;
+  top: auto;
+  bottom: -3px;
+  z-index: 1;
+  -webkit-transition: background .185s ease-out, -webkit-transform .185s ease-out;
+  transition: background .185s ease-out, -webkit-transform .185s ease-out;
+  transition: transform .185s ease-out, background .185s ease-out;
+  transition: transform .185s ease-out, background .185s ease-out, -webkit-transform .185s ease-out;
+}
+
+/*contenido, color, alineacion, display de los botones*/
+.retro-boton .boton .boton-inner .content-wrapper {
+  position: relative;
+  font-family: inherit;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  width: 100%;
+  height: calc(100% - 3px);
+  margin-top: -3px;
+}
+.retro-boton .boton .boton-inner .content-wrapper .boton-content {
+  background-image: initial;
+  background-color: #26a69a;
+  color: #ebf1f8;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  border-radius: 3px;
+  text-indent: 0;
+  z-index: 3;
+  overflow: hidden;
+  padding: 0 16px;
+  -webkit-transition: border .185s ease-out,background .185s ease-out,color .185s ease-out,-webkit-transform .185s ease-out;
+  transition: border .185s ease-out,background .185s ease-out,color .185s ease-out,-webkit-transform .185s ease-out;
+  transition: border .185s ease-out,transform .185s ease-out,background .185s ease-out,color .185s ease-out;
+  transition: border .185s ease-out,transform .185s ease-out,background .185s ease-out,color .185s ease-out,-webkit-transform .185s ease-out;
+}
+
+
+/*Para que se sigan mostrando las palabras al pulsar*/
+.retro-boton .boton .boton-inner .content-wrapper .boton-content .boton-content-inner {
+  display: block;
+  -webkit-transition: opacity 75ms ease-out .1125s;
+  transition: opacity 75ms ease-out .1125s;
+}
+/*Para que se muestren las palabras*/
+.retro-boton .boton .boton-inner .content-wrapper .boton-content .boton-content-inner:before {
+  content: attr(label);
+  padding-top: 9.5px;
+  font-size: .8em;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: .06em;
+  -webkit-transition: opacity .3s ease-out, background-color .1125s ease-in;
+  transition: opacity .3s ease-out, background-color .1125s ease-in;
+  opacity: 1;
+  z-index: -1;
+}

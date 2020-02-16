@@ -1,0 +1,45 @@
+#titulo{
+	text-align: center;
+	font-size: 5em;
+	position: relative;
+}
+#ranking{
+	position: absolute;
+	margin-top: 50px;
+	margin-left:8%;
+	margin-right: 8%;
+	/*border: 1px solid #326295;*/
+}
+.celdath{
+	text-align: center;
+	width: 500px;
+	height: 40px;
+	font-size: 1em;
+}
+.celda{
+	width: 500px;
+	height: 40px;
+
+}
+.celda span{
+	position: relative;
+	left: 15px;
+}
+#columnath{
+	background-color: #326295;
+	color: white;
+}
+#columna:nth-of-type(odd){
+	background-color: #DADBDC;
+}
+#columna:nth-of-type(even){
+	background-color: white;
+}
+#columna:hover{
+	background-color: rgba(50,98,149,.3);
+}
+#volver{
+	position: absolute;
+	bottom: 50px;
+	left: 45%;
+}
