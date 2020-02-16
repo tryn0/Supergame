@@ -1,33 +1,20 @@
 <?php
 	session_start();
-	$sushi = $_POST['puntosSushi'];
+	$goku = $_POST['puntosGoku'];
 	//$memory = $_POST['puntosMemory'];
 	//$carrera = $_POST['puntosCarrera'];
 	//$sonic = $_POST['puntosSonic'];
 
-	//Gestion de puntos para SushiGame
-	if (empty($_SESSION['sushiGame'])) {
-		$_SESSION['sushiGame'] = $sushi;
-		$_SESSION['mensaje'] = "¡Enhorabuena! Has conseguido " . $_SESSION['sushiGame'] . " puntos.";
-	} elseif ($_SESSION['sushiGame'] < $sushi) {
-		$_SESSION['mensaje'] = "Has superado tu anterior record de " . $_SESSION['sushiGame'] . " puntos. ¡Enhorabuena! " . " Ahora tienes " . $sushi . " puntos.";
-		$_SESSION['sushiGame'] = $sushi;
-	} elseif ($_SESSION['sushiGame'] > $sushi) {
-		$_SESSION['mensaje'] = "Has conseguido " . $sushi . " puntos. No has superado tu anterior record de " . $_SESSION['sushiGame'] . " puntos.";
+	//Gestion de puntos para Goku Jump
+	if (empty($_SESSION['gokuJump'])) {
+		$_SESSION['gokuJump'] = $goku;
+		$_SESSION['mensaje'] = "¡Enhorabuena! Has conseguido " . $_SESSION['gokuJump'] . " puntos.";
+	} elseif ($_SESSION['gokuJump'] < $goku) {
+		$_SESSION['mensaje'] = "Has superado tu anterior record de " . $_SESSION['gokuJump'] . " puntos. ¡Enhorabuena! " . " Ahora tienes " . $goku . " puntos.";
+		$_SESSION['gokuJump'] = $goku;
+	} elseif ($_SESSION['gokuJump'] > $goku) {
+		$_SESSION['mensaje'] = "Has conseguido " . $goku . " puntos. No has superado tu anterior record de " . $_SESSION['gokuJump'] . " puntos.";
 	} else {
-		$sushi = 0;
-	}
-
-	//Gestión de puntos de Memory
-	if (empty($_SESSION['memory'])) {
-		$_SESSION['memory'] = $memory;
-		$_SESSION['mensaje'] = "¡Enhorabuena! Has conseguido " . $_SESSION['memory'] . " puntos.";
-	} elseif ($_SESSION['memory'] < $memory) {
-		$_SESSION['mensaje'] = "Has superado tu anterior record de " . $_SESSION['memory'] . " puntos. ¡Enhorabuena! " . " Ahora tienes " . $memory . " puntos.";
-		$_SESSION['memory'] = $memory;
-	} elseif ($_SESSION['memory'] > $memory) {
-		$_SESSION['mensaje'] = "Has conseguido " . $memory . " puntos. No has superado tu anterior record de " . $_SESSION['memory'] . " puntos.";
-	} else {
-		$memory = 0;
+		$goku = 0;
 	}
 ?>
