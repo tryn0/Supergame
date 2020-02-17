@@ -65,15 +65,16 @@ class Usuario {
   //Obtiene tu posición con respecto a todos los jugadores
   public static function getPosicion($nombre, $curso) {
     $conexion = JuegoDB::connectDB();
-    $seleccion = "SELECT nombre, curso, ROW_NUMBER() OVER(PARTITION by nombre AND curso ORDER BY puntuacion DESC) AS posicion FROM usuarios ";
+    $seleccion = "SELECT * FROM usuarios ";
     $consulta = $conexion->query($seleccion);
     //$usuarios = [];
+    $cont = 0;
     while ($registro = $consulta->fetchObject()) {
+      $cont += 1;
       if($registro->nombre == $nombre and $registro->curso == $curso) {
-        $posicion = $registro->posicion;
+        $mensaje = "Has quedado en " . $cont . "º posición. ¡Felicidades!";
+        return $mensaje; 
       }
-    }
-    $mensaje = "Has quedado en " . $posicion . "º posición. ¡Felicidades!";
-    return $mensaje;    
+    }   
   }
 }
