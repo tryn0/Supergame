@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "upheavtt";
+  src: url("../fonts/upheavtt.ttf");
+}
 #titulo{
 	text-align: center;
 	font-size: 5em;
@@ -42,4 +46,11 @@
 	position: absolute;
 	bottom: 50px;
 	left: 45%;
+}
+.tumarcador{
+	font-family: "upheavtt";
+	font-size: 3em;
+	position: absolute;
+	bottom: 150px;
+	left: 25%;
 }

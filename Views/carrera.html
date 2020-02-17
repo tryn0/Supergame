@@ -1,13 +1,29 @@
 <html>
-
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./styles/carrera.css">
+    <link rel="stylesheet" type="text/css" href="./styles/botones.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
+    <script type="text/javascript" src="./scripts/carrera.js"></script>
+    <title>Carrera</title>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
-<script type="text/javascript" src="./scripts/carrera.js"></script>
-
 <body>
-    <input type="button" class="button" id="reset" value="REINICIAR"></div>
+    <div class='wrapper' id="reset">
+        <div role='button' class='retro-boton primary'>
+            <a class='boton' href="index.php"> 
+            <span class='boton-inner'>
+                <span class='content-wrapper'>
+                  <span class='boton-content'>
+                    <span class='boton-content-inner' label='REINICIAR'>
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </a>
+        </div>
+    </div>
     <div id="tiempo">
         <span id="minuto"></span>
         :
@@ -18,7 +34,6 @@
 
     </div>
     <img id="bandera" src="./images/bandera.png"></img>
-
+    <script  src='../Views/scripts/botones.js'></script>
 </body>
-
 </html>

@@ -41,9 +41,9 @@
           var sec = parseInt($("#segundo").text());
           if (sec <= 5) {
             puntos = 2000;
-          } else if (sec >= 10 && sec <= 15) {
+          } else if (sec > 5 && sec <= 10) {
             puntos = 1500;
-          } else if (sec > 15 && sec <= 20) {
+          } else if (sec > 10 && sec <= 15) {
             puntos = 1000;
           } else {
             puntos = 500;
@@ -51,7 +51,7 @@
           // al ganar añado un div con un boton para ir al menu y la puntuacion
           $("body").append("<div id='success'> </div>");
           $("#success").text("Has ganado " + puntos + " puntos");
-          $("#success").append("<input type='button' class='button' id='volver' value='Volver al menu'></input>");
+          $("#success").append("<div class='wrapper' id='volver'><div role='button' class='retro-boton primary'><a class='boton' href='index.php'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al inicio'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
 
           //paro el crono y el settimeout de ir hacia atras
           clearTimeout(id);
