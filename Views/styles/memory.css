@@ -26,7 +26,7 @@ body {
 }
 
 
-#cajacartas div{
+#cajacartas  div{
     float: left;
 	width: 20%;
 	height: 18%;
@@ -73,8 +73,7 @@ body {
 }
 #success {
 	border-radius: 15px;
-	background-color: black;
-	opacity:0.90;
+	background-color: rgba(0,0,0,0.5);
 	text-align: center;
 	font-family: Upheavtt;
 	font-size: 250%;
@@ -95,10 +94,8 @@ body {
 	height: 20%;
 
 }
-#mapa{
-	position: absolute;
-	right: 38%;
-	top:20%;
-	width: 30%;
-	height: 30%;
+.wrapper{
+	position: relative;
+	top: 100px;
+	right: 25%;
 }

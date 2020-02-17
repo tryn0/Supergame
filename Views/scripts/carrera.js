@@ -34,7 +34,7 @@
       if (e.which == 32) {
         // si la posicion de mi jinete es menor que el ancho del div de la carrera que siga
         if (posicion <= anchodiv - 100) {
-          jinete.css('left', parseInt(jinete.css('left')) + 400);
+          jinete.css('left', parseInt(jinete.css('left')) + 40);
           //si supera el ancho, ya ha llegado a la meta
         } else {
           // segun los segundos se puntua
@@ -51,7 +51,7 @@
           // al ganar añado un div con un boton para ir al menu y la puntuacion
           $("body").append("<div id='success'> </div>");
           $("#success").text("Has ganado " + puntos + " puntos");
-          $("#success").append("<div class='wrapper' id='volver'><div role='button' class='retro-boton primary'><a class='boton' href='index.php'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al inicio'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
+          $("#success").append("<div class='wrapper' id='volver'><div role='button' class='retro-boton primary'><a class='boton' href='index.php'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al menú'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
 
           //paro el crono y el settimeout de ir hacia atras
           clearTimeout(id);
