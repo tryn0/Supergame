@@ -13,7 +13,7 @@
   if (empty($_SESSION['carrera'])) {
   	$_SESSION['carrera'] = 0;
   }
-  $puntosTotal = $_SESSION['sushiGame'] + $_SESSION['puntosGoku'] + $_SESSION['memory'] + $_SESSION['carrera'];
+  $puntosTotal = $_SESSION['sushiGame'] + $_SESSION['gokuJump'] + $_SESSION['memory'] + $_SESSION['carrera'];
   $jugador = new Usuario($_SESSION['user'], $puntosTotal, $_SESSION['curso']);
   $jugador->insert();
   $posicion = Usuario::getPosicion($_SESSION['user'],$_SESSION['curso']);

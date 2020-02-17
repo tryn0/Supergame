@@ -1,0 +1,144 @@
+body{
+	background-image: url("../images/fondo.jpg");
+	background-size: 85% ;
+	background-repeat: repeat-x;
+	animation: deslizafondo 4s steps(4) infinite;
+	overflow: hidden;
+	
+}
+
+button{
+	font-family: "upheavtt";
+}
+
+@font-face {
+  font-family: "upheavtt";
+  src: url("../fonts/upheavtt.ttf");
+}
+
+/*figura corriendo*/
+#figura1{
+	position: absolute;
+	width: 170px;
+	height: 170px;
+	bottom: 95px;
+	left: 700px;
+}
+/*figura salto*/
+#figura2{
+	position: absolute;
+	width: 175px;
+	height: 175px;
+	bottom: 95px;
+	left: 700px;
+}
+
+#suelo{
+	position: absolute;
+	border-radius: 10px;
+	border: 1px solid white;
+	bottom: 0px;
+	width: 150%;
+	height:9%;
+	animation: desliza 0.3s linear infinite;
+
+}
+
+#obstaculo{
+	width: 200px;
+	height: 170px;
+	position: absolute;
+	right: -20%;
+	bottom: 40px;
+	animation: deslizaobstaculo 1s linear infinite;
+	transform:scaleX(-1);
+	background: transparent;
+}
+
+#obstaculo2{
+	width: 450px;
+	height: 280px;
+	position: absolute;
+	right: -20%;
+	bottom: 60px;
+}
+
+#reloj {
+  font-size:70px;
+  color:#434343;
+  position: absolute;
+  width: 300px;
+  height: 150px;
+  font-family: "upheavtt";
+  left: 50px;
+}
+
+#gameover{
+	top: 30%;
+	width: 600px;
+	height: 300px;
+	background-color: #918B85;
+	position: absolute;
+	left: 32%;
+	border: solid white 1px;
+	border-radius: 5deg;
+}
+
+#txtgameover{
+	position: absolute;
+	font-family: "upheavtt";
+	font-size:70px;
+	left: 18%;
+}
+#gameover p{
+	position: absolute;
+	font-family: "upheavtt";
+	font-size:30px;
+	left: 18%;
+	top: 30%;
+}
+
+#jugar{
+	position: absolute;
+	top: 65%;
+	width: 230px;
+	height: 60px;
+	left: 10%;
+}
+
+#salir{
+	position: absolute;
+	top: 65%;
+	width: 230px;
+	height: 60px;
+	left: 55%;
+}
+
+#puntos{
+	position: absolute;
+	left: 50%;
+}
+
+@-moz-keyframes desliza {
+	0%{ left: -25px; }
+	25%{ left: -150 px; }
+  50%{ left: -250px; }
+  75%{ left: -350px; }  
+  100% { left: -450px; } 
+}
+@-webkit-keyframes desliza {
+	0%{ left: -25px; }
+  50% { left: -220px; } 
+  100% { left: -450px; } 
+}
+/*
+@-moz-keyframes deslizafondo {
+	0%{ background-position: 0px 0; }
+	25%{ background-position: -80px 0; }
+  50% { background-position: -160px 0; } 
+  100% { background-position: -240px 0; } 
+}
+@-webkit-keyframes deslizafondo {
+	0%{ background-position: 0px 0; } 
+  100% { background-position: -240px 0; } 
+}

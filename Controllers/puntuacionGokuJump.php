@@ -1,9 +1,6 @@
 <?php
 	session_start();
 	$goku = $_POST['puntosGoku'];
-	//$memory = $_POST['puntosMemory'];
-	//$carrera = $_POST['puntosCarrera'];
-	//$sonic = $_POST['puntosSonic'];
 
 	//Gestion de puntos para Goku Jump
 	if (empty($_SESSION['gokuJump'])) {
