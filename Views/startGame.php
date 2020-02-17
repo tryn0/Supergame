@@ -15,10 +15,17 @@
         <title>Login</title>
     </head>
     <body class="h-100" id="pantallaInicio" background="../Views/images/principal.jpg" style="background-size: 100% 100%;">
+        <!-- Comprueba que el js está habilitado. Valida por php en el caso -->
+        <noscript><?php $jsSupport='false'; ?></noscript>
+        <?php 
+        if ($jsSupport == 'false') {
+            include '../Controllers/reglasLogin.php';
+        }
+        ?>
         <div class="container h-100">
             <div class="row justify-content-center h-100 align-items-center" >
                 <div class="col-4 col-md-4 col-lg-6 col-xl-5 pt-1 pb-1" id="sombreado">
-                    <form method="POST" class="justify-content-center">
+                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST" class="justify-content-center">
                         <div class="form-group" id="texto">
                             <label for="jugador">Jugador o grupo:</label>
                             <input class="form-control" type="text" name="jugador" id="jugador" placeholder="Nombre del jugador">
@@ -37,6 +44,7 @@
                                 ?>
                             </select>
                         </div>
+                        <div><?php echo $mensaje; ?></div>
                         <button type="submit" name="enviarJugador" class="btn btn-success" data-toggle="tooltip" data-placement="bottom" title="Empezar a jugar">Empezar</button>
                     </form>
                     <?php if(!empty($error)){echo $error;} ?>
