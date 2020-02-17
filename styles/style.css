@@ -2,13 +2,13 @@ body{
 	background-image: url("../multimedia/fondo.jpg");
 	background-size: 85% ;
 	background-repeat: repeat-x;
-	animation: deslizafondo 1.5s linear infinite;
+	animation: deslizafondo 4s steps(4) infinite;
 	overflow: hidden;
 	
 }
 
-div{
-
+button{
+	font-family: "upheavtt";
 }
 
 @font-face {
@@ -131,7 +131,7 @@ div{
   50% { left: -220px; } 
   100% { left: -450px; } 
 }
-
+/*
 @-moz-keyframes deslizafondo {
 	0%{ background-position: 0px 0; }
 	25%{ background-position: -80px 0; }
@@ -139,8 +139,6 @@ div{
   100% { background-position: -240px 0; } 
 }
 @-webkit-keyframes deslizafondo {
-	0%{ background-position: 0px 0; }
-	25%{ background-position: -80px 0; }
-  50% { background-position: -160px 0; } 
+	0%{ background-position: 0px 0; } 
   100% { background-position: -240px 0; } 
 }
