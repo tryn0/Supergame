@@ -67,7 +67,6 @@ class Usuario {
     $conexion = JuegoDB::connectDB();
     $seleccion = "SELECT * FROM usuarios ";
     $consulta = $conexion->query($seleccion);
-    //$usuarios = [];
     $cont = 0;
     while ($registro = $consulta->fetchObject()) {
       $cont += 1;
