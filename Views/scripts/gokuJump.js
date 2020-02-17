@@ -14,12 +14,6 @@ $(document).ready(function(){
 			}
 	});
   //llamaborrar();
-  $("#jugar").click(function(){
-    window.location.reload();
-  });
-  $("#salir").click(function(){
-
-  });
 });
 
 function mandarPuntos(puntos){

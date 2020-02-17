@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>Goku Jump</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts/gokuJump.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles/gokuJump.css">
+	<link rel="stylesheet" type="text/css" href="./styles/botones.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"> </script>
 
 </head>
 <body id="body">
@@ -15,8 +19,36 @@
 	<div id="gameover" style="display: none;">
 		<h1 id="txtgameover">GAME OVER</h1>
 		<p id="puntos"></p>
-		<button id="jugar">Jugar de nuevo</button>
-		<button id="salir">Salir del juego</button>
+
+		<div class='wrapper' id="jugar">
+	        <div role='button' class='retro-boton primary'>
+	            <a class='boton' href=""> 
+	            <span class='boton-inner'>
+	                <span class='content-wrapper'>
+	                  <span class='boton-content'>
+	                    <span class='boton-content-inner' label='Jugar de nuevo'>
+	                    </span>
+	                  </span>
+	                </span>
+	              </span>
+	            </a>
+	        </div>
+   		</div>
+		<div class='wrapper' id="salir">
+	        <div role='button' class='retro-boton primary'>
+	            <a class='boton' href="../Views/content/mapa.html"> 
+	            <span class='boton-inner'>
+	                <span class='content-wrapper'>
+	                  <span class='boton-content'>
+	                    <span class='boton-content-inner' label='Volver al menú'>
+	                    </span>
+	                  </span>
+	                </span>
+	              </span>
+	            </a>
+	        </div>
+   		</div>
+		<script  src='../Views/scripts/botones.js'></script>
 	</div>
 </body>
 </html>
