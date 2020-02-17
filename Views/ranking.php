@@ -9,17 +9,21 @@
 
 </head>
 <body>
-    <h1 id="titulo">Ranking</h1>
+    <h1 id="titulo">Ranking TOP 10</h1>
     <table id="ranking">
         <tr id="columnath">
+            <th class="celdath">Posición</th>
             <th class="celdath">Usuario</th>
             <th class="celdath">Curso</th>
             <th class="celdath">Puntuación</th>
         </tr>
-        <?php 
+        <?php
+            $contador = 0;
             foreach ($data['usuarios'] as $indice) {
+            $contador += 1;
         ?>
         <tr id="columna">
+            <td class="celda"><span><?php echo $contador . "º"; ?></span></td>
             <td class="celda"><span><?php echo $indice->getName(); ?></span></td>
             <td class="celda"><span><?php echo $indice->getCurso(); ?></span></td>
             <td class="celda"><span><?php echo $indice->getPoints(); ?></span></td>
@@ -28,6 +32,9 @@
             } 
         ?>
     </table>
+    <div class="tumarcador">
+        <span><?php echo $posicion ?>
+    </div>
     <div class='wrapper' id="volver">
         <div role='button' class='retro-boton primary'>
             <a class='boton' href="index.php"> 

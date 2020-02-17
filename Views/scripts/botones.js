@@ -38,4 +38,3 @@ for(var i = 0; i < buttons.length; i++) {
     this.className = clearedClassList + " " + newClass;
   });
 }
-

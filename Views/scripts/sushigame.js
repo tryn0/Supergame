@@ -81,13 +81,13 @@ $(document).ready(function(){
 			}
 		}
 		function mandarPuntos(){
-            var puntos = { puntosSushi: parseInt($("#puntos").text())};
+            var puntos = {puntosSushi: parseInt($("#puntos").text())};
             $.ajax({
-                    url:   '../Controllers/puntuaciones.php', //archivo que recibe la peticion
+                    url:   '../Controllers/puntuacionSushigame.php', //archivo que recibe la peticion
                     type:  'post', //método de envio
                     data: puntos, //datos que se envian a traves de ajax
                     success:  function () { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                        window.location.replace('../Controllers/finalJuego.php')
+                        window.location.replace('../Controllers/finalSushigame.php')
                     }
             });
         }

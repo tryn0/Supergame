@@ -5,10 +5,10 @@ $(document).ready(function(){
     $('.transparente').css('box-shadow','9px 9px 37px -4px rgba(255,255,255,0.53)');
     $('[data-toggle="tooltip"]').tooltip();
 
-    $('#jugar').click(function(){
-    	window.location.replace("juego.html");
+    $('#volverAjugar').click(function(){
+    	window.location.replace("../Views/sushigame.html");
     });
-    $('#inicio').click(function(){
-    	window.location.replace("../Controllers/index.php");
+    $('#volverAinicio').click(function(){
+    	window.location.replace("../Views/content/mapa.html");
     });
 });

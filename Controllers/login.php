@@ -5,9 +5,9 @@
 	require_once '../Models/Curso.php';
 
 	if(!empty($_POST['jugador'])){
-		$usuario = Usuario::comprobarUser($_POST['jugador']);
+		$usuario = Usuario::comprobarUser($_POST['jugador'], $_POST['curso']);
 		if(!$usuario && !empty($_POST['curso'])) {
-			$_SESSION['user'] = $usuario;
+			$_SESSION['user'] = $_POST['jugador'];
 			$_SESSION['curso'] = $_POST['curso'];
 			header("location: ../Views/content/mapa.html");
 		} else {

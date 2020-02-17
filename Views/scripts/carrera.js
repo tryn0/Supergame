@@ -1,5 +1,17 @@
-$(document).ready(function () {
-  $(function () {
+  $(function(){
+    //Mandar los puntos por ajax
+    function mandarPuntos(){
+      var puntuacion = { puntosCarrera: puntos};
+      $.ajax({
+        url:   '../Controllers/puntuacionCarrera.php', //archivo que recibe la peticion
+        type:  'post', //método de envio
+        data: puntuacion, //datos que se envian a traves de ajax
+        success:  function () { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            window.location.replace("../Views/content/mapa.html");
+        }
+      });
+    }
+
     var jinete = $("#jinete");
     var anchodiv = $("#carrera").width();
     var id;
@@ -22,16 +34,16 @@ $(document).ready(function () {
       if (e.which == 32) {
         // si la posicion de mi jinete es menor que el ancho del div de la carrera que siga
         if (posicion <= anchodiv - 100) {
-          jinete.css('left', parseInt(jinete.css('left')) + 500);
+          jinete.css('left', parseInt(jinete.css('left')) + 400);
           //si supera el ancho, ya ha llegado a la meta
         } else {
           // segun los segundos se puntua
           var sec = parseInt($("#segundo").text());
           if (sec <= 5) {
             puntos = 2000;
-          } else if (sec >= 10 && sec <= 15) {
+          } else if (sec > 5 && sec <= 10) {
             puntos = 1500;
-          } else if (sec > 15 && sec <= 20) {
+          } else if (sec > 10 && sec <= 15) {
             puntos = 1000;
           } else {
             puntos = 500;
@@ -39,14 +51,17 @@ $(document).ready(function () {
           // al ganar añado un div con un boton para ir al menu y la puntuacion
           $("body").append("<div id='success'> </div>");
           $("#success").text("Has ganado " + puntos + " puntos");
-          $("#success").append("<input type='button' class='button' id='volver' value='Volver al menu'></input>");
+          $("#success").append("<div class='wrapper' id='volver'><div role='button' class='retro-boton primary'><a class='boton' href='index.php'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al inicio'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
 
           //paro el crono y el settimeout de ir hacia atras
           clearTimeout(id);
           parar();
           // le quito el evento de pulsar para que no pueda seguir ejecutandose
           $(document).off("keyup");
-
+          $('#volver').click(function(){
+            mandarPuntos();
+          })
+          
         }
         // me creo la marcha atras del caballo cada segundo cada vez que levante la tecla
         id = setTimeout(function () {
@@ -89,9 +104,8 @@ $(document).ready(function () {
     }, 1000);
 
 
-  }
-  // parar el cronometro
-  function parar() {
-    clearInterval(tiempo_corriendo);
-  }
-});
+}
+// parar el cronometro
+function parar() {
+  clearInterval(tiempo_corriendo);
+}
