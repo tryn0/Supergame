@@ -65,7 +65,7 @@ class Usuario {
   //Obtiene tu posición con respecto a todos los jugadores
   public static function getPosicion($nombre, $curso) {
     $conexion = JuegoDB::connectDB();
-    $seleccion = "SELECT * FROM usuarios ORDER BY puntuacion";
+    $seleccion = "SELECT * FROM usuarios ORDER BY puntuacion DESC";
     $consulta = $conexion->query($seleccion);
     $cont = 0;
     while ($registro = $consulta->fetchObject()) {

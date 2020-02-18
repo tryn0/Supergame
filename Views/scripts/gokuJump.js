@@ -86,7 +86,7 @@ function borraobj(){
   }
 
   function mueveobstaculo(){  
-    $("#suelo").after("<img src='multimedia/valla.png' id='obstaculo'>");
+    $("#suelo").after("<img src='images/valla.png' id='obstaculo'>");
     if ($("#obstaculo")!= 'undefined') {
       $("#obstaculo").animate({right:"-20%"});
       $("#obstaculo").animate({right:"-10%"});
