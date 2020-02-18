@@ -1,8 +1,7 @@
 body{
-	background-image: url("../images/fondo.jpg");
+	background-image: url("../multimedia/fondo.jpg");
 	background-size: 85% ;
 	background-repeat: repeat-x;
-	animation: deslizafondo 4s steps(4) infinite;
 	overflow: hidden;
 	
 }
@@ -19,18 +18,18 @@ button{
 /*figura corriendo*/
 #figura1{
 	position: absolute;
-	width: 170px;
-	height: 170px;
-	bottom: 95px;
-	left: 700px;
+	width: 120px;
+	height: 120px;
+	bottom: 60px;
+	left: 500px;
 }
 /*figura salto*/
 #figura2{
 	position: absolute;
-	width: 175px;
-	height: 175px;
-	bottom: 95px;
-	left: 700px;
+	width: 120px;
+	height: 120px;
+	bottom: 300px;
+	left: 500px;
 }
 
 #suelo{
@@ -45,11 +44,11 @@ button{
 }
 
 #obstaculo{
-	width: 200px;
-	height: 170px;
+	width: 170px;
+	height: 120px;
 	position: absolute;
 	right: -20%;
-	bottom: 40px;
+	bottom: 30px;
 	animation: deslizaobstaculo 1s linear infinite;
 	transform:scaleX(-1);
 	background: transparent;
@@ -77,9 +76,9 @@ button{
 	top: 30%;
 	width: 600px;
 	height: 300px;
-	background-color: rgba(146, 140, 135, 0.5);
+	background-color: #918B85;
 	position: absolute;
-	left: 32%;
+	left: 24%;
 	border: solid white 1px;
 	border-radius: 5deg;
 }
@@ -130,15 +129,4 @@ button{
 	0%{ left: -25px; }
   50% { left: -220px; } 
   100% { left: -450px; } 
-}
-/*
-@-moz-keyframes deslizafondo {
-	0%{ background-position: 0px 0; }
-	25%{ background-position: -80px 0; }
-  50% { background-position: -160px 0; } 
-  100% { background-position: -240px 0; } 
-}
-@-webkit-keyframes deslizafondo {
-	0%{ background-position: 0px 0; } 
-  100% { background-position: -240px 0; } 
 }

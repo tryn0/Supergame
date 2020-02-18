@@ -1,19 +1,19 @@
-$(document).ready(function(){	
-	carga();		
+$(document).ready(function(){ 
+  carga();    
   llamada1();
-	$(document).keypress(function(e){	
-		if (e.which==32) {
-			$("#figura1").attr('style','display:none;');
-			$("#figura2").attr('style','display:block;');
-			$("#figura2").animate({bottom:"450px"});
-			$("#figura2").animate({bottom:"95px"}
-				,900, function(){
-					$("#figura1").attr('style','display:block;');
-					$("#figura2").attr('style','display:none;');
-				});
-			}
-	});
-  //llamaborrar();
+  $(document).keypress(function(e){ 
+    if (e.which==32) {
+      $("#figura1").attr('style','display:none;');
+      $("#figura2").attr('style','display:block;');
+      $("#figura2").animate({bottom:"300px"});
+      $("#figura2").animate({bottom:"95px"}
+        ,800, function(){
+          $("#figura1").attr('style','display:block;');
+          $("#figura2").attr('style','display:none;');
+        });
+      }
+  });
+  llamaborrar();
 });
 
 function mandarPuntos(puntos){
@@ -29,9 +29,9 @@ function mandarPuntos(puntos){
 
 function sacapuntos(){
 
-	var tiempo=String(contador_m)+String(contador_s);
-	var puntos=tiempo*10;
-	return puntos;
+  var tiempo=String(contador_m)+String(contador_s);
+  var puntos=tiempo*10;
+  return puntos;
 
 }
 
@@ -54,13 +54,13 @@ function carga(){
                     }
                 }
                 if (contador_m<10 && contador_s<10) {
-                	m.textContent = "0"+contador_m+" : "+"0"+contador_s;
+                  m.textContent = "0"+contador_m+" : "+"0"+contador_s;
                 }
                 else if(contador_m<10 && contador_s>10){
-                	m.textContent = "0"+contador_m+" : " +contador_s;
+                  m.textContent = "0"+contador_m+" : " +contador_s;
                 }
                 else{
-                	m.textContent = contador_m+" : "+contador_s;
+                  m.textContent = contador_m+" : "+contador_s;
                 }     
                 contador_s++;
             }
@@ -68,20 +68,25 @@ function carga(){
     };
 
 function llamaborrar(){
-  borrado = setInterval(borraobj, 8000);
+  borrado = setInterval(borraobj, 7000);
 }
 
 function borraobj(){
-  $("#obstaculo").remove();
+  var obs=document.getElementById("obstaculo");
+  let coords = obs.getBoundingClientRect();
+  var right= coords.right;
+  if (right <=0) {
+    obs.remove();
+  }
 }
 
-	function llamada1() {
- 	 	intervalo = setInterval(mueveobstaculo, milisegundos(2000,4000));
+  function llamada1() {
+    intervalo = setInterval(mueveobstaculo, milisegundos(2000,4000));
     
-	}
+  }
 
-	function mueveobstaculo(){	
-		$("#suelo").after("<img src='images/valla.png' id='obstaculo'>");
+  function mueveobstaculo(){  
+    $("#suelo").after("<img src='multimedia/valla.png' id='obstaculo'>");
     if ($("#obstaculo")!= 'undefined') {
       $("#obstaculo").animate({right:"-20%"});
       $("#obstaculo").animate({right:"-10%"});
@@ -92,39 +97,30 @@ function borraobj(){
         llamadetectorcolision();
         $("#obstaculo").animate({right:""+move+"%"});
         llamadetectorcolision();
-        var obs=document.getElementById("obstaculo");
-        let coords = obs.getBoundingClientRect();
-        if (coords <=0) {
-          $("#obstaculo").remove();
-        }
       }
     }
-		
-	}
-
-function llamada2() {
- 	 intervalo2 = setInterval(mueveobstaculo, milisegundos(1000,7000));
-}
+    
+  }
 
 function llamadetectorcolision(){
-	var llamardetector=setInterval(DetectarColision,1);
+  var llamardetector=setInterval(DetectarColision,1);
 }
 
-function DetectarColision(){	
-	/// "a" y "b" deben ser dos objetos HTMLElement
-  		var a = $("#figura1");
-  		var b = $("[id*=obstaculo]");
+function DetectarColision(){  
+  /// "a" y "b" deben ser dos objetos HTMLElement
+      var a = $("#figura1");
+      var b = $("[id*=obstaculo]");
       var c = $("#figura2");
   
-  		var a_pos = {t : a.position().top, 
-  					l: a.position().left, 
-               		r: a.position().left + a.width(), 
-               		b: a.position().top + a.height()};
+      var a_pos = {t : a.position().top, 
+            l: a.position().left, 
+                  r: a.position().left + a.width(), 
+                  b: a.position().top + a.height()};
 
-  		var b_pos =  {t : b.position().top, 
-  						l: b.position().left, 
-               		r: b.position().left + b.width(), 
-               		b: b.position().top + b.height()}; 
+      var b_pos =  {t : b.position().top, 
+              l: b.position().left, 
+                  r: b.position().left + b.width(), 
+                  b: b.position().top + b.height()}; 
 
       var c_pos =  {t : c.position().top, 
               l: c.position().left, 
@@ -132,19 +128,19 @@ function DetectarColision(){
                   b: c.position().top + c.height()};           
 
  //Detecta si se superponen las áreas
-  		if(   a_pos.l <= b_pos.r && a_pos.r >= b_pos.l 
-    		&& a_pos.b >= b_pos.t && a_pos.t <= b_pos.b ){
-  				var puntosfinal=sacapuntos();
-          mandarPuntos(parseInt(puntosfinal));
-  				document.getElementById("puntos").textContent = "Puntuacion : "+puntosfinal;
+      if(   a_pos.l <= b_pos.r && a_pos.r >= b_pos.l 
+        && a_pos.b >= b_pos.t && a_pos.t <= b_pos.b ){
+          var puntosfinal=sacapuntos();
+          document.getElementById("puntos").textContent = "Puntuacion : "+puntosfinal;
           $("body").css("animation-play-state", "paused");
- 				  $("#figura1").css("display","none");
- 				  $("#suelo").css("display","none");
- 				  $("#obstaculo").css("display","none");
- 				  $("#gameover").css("display","block");
- 				  detenerse();	
- 				  clearInterval(intervalo);
- 		}/*
+          $("#figura1").css("display","none");
+          $("#suelo").css("display","none");
+          $("#obstaculo").css("display","none");
+          $("#gameover").css("display","block");
+          detenerse();  
+          clearInterval(intervalo);
+          clearInterval(borrado);
+    }/*
     else if (c_pos.l <= b_pos.r && c_pos.r >= b_pos.l 
         && c_pos.b >= b_pos.t && c_pos.t <= b_pos.b){
           var puntosfinal=sacapuntos();
@@ -158,10 +154,10 @@ function DetectarColision(){
           detenerse();  
           clearInterval(intervalo);
     }*/
-	}
+  }
 
 
 function milisegundos(min,max) {
-	return Math.floor(Math.random() * (max - min) + min);
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
