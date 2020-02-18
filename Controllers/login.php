@@ -3,7 +3,7 @@
 	
 	require_once '../Models/Usuario.php';
 	require_once '../Models/Curso.php';
-	if(!empty($_POST['jugador'])){
+	if(isset($_POST['jugador'])){
 		$usuario = Usuario::comprobarUser($_POST['jugador'], $_POST['curso']);
 		//Comprueba la validación del js si tiene js es true
 		if ($_SESSION['valido']) {

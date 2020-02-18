@@ -20,6 +20,8 @@
         <?php 
         if ($jsSupport == 'false') {
             include '../Controllers/reglasLogin.php';
+        } else {
+            $_SESSION['valido']=true;
         }
         ?>
         <div class="container h-100">
