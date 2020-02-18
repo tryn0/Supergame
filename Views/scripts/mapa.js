@@ -216,7 +216,7 @@ $(document).ready(function(){
                     break;
                 case 'Kioto':
                     if (confirm("¿Quieres viajar a "+intersects[0].object.name+"? Jugarás a Goku Jump")) {
-                        window.location.href = '../kioto.html';
+                        window.location.href = '../gokuJump.html';
                     }else{
                         return false;
                     }

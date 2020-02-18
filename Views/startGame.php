@@ -15,7 +15,7 @@
         <title>Login</title>
     </head>
     <body class="h-100" id="pantallaInicio" background="../Views/images/principal.jpg" style="background-size: 100% 100%;">
-        <!-- Si java script no está habilitado, validación por php -->
+        <!-- Comprueba que el js está habilitado. Valida por php en el caso -->
         <noscript><?php $jsSupport='false'; ?></noscript>
         <?php 
         if ($jsSupport == 'false') {

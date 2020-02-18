@@ -7,7 +7,6 @@
         type:  'post', //método de envio
         data: puntuacion, //datos que se envian a traves de ajax
         success:  function () { //una vez que el archivo recibe el request lo procesa y lo devuelve
-            window.location.replace("../Views/content/mapa.html");
         }
       });
     }
@@ -34,7 +33,7 @@
       if (e.which == 32) {
         // si la posicion de mi jinete es menor que el ancho del div de la carrera que siga
         if (posicion <= anchodiv - 100) {
-          jinete.css('left', parseInt(jinete.css('left')) + 400);
+          jinete.css('left', parseInt(jinete.css('left')) + 40);
           //si supera el ancho, ya ha llegado a la meta
         } else {
           // segun los segundos se puntua
@@ -51,16 +50,17 @@
           // al ganar añado un div con un boton para ir al menu y la puntuacion
           $("body").append("<div id='success'> </div>");
           $("#success").text("Has ganado " + puntos + " puntos");
-          $("#success").append("<div class='wrapper' id='volver'><div role='button' class='retro-boton primary'><a class='boton' href='index.php'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al inicio'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
-
+          $("#success").append("<div class='wrapper' id='volver'><div role='button' class='retro-boton primary'><a class='boton' href='../Views/content/mapa.html'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al menú'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
+          //Mandar dartos por ajax
+          mandarPuntos();
           //paro el crono y el settimeout de ir hacia atras
           clearTimeout(id);
           parar();
           // le quito el evento de pulsar para que no pueda seguir ejecutandose
           $(document).off("keyup");
-          $('#volver').click(function(){
+          /*$('#volver').click(function(){
             mandarPuntos();
-          })
+          })*/
           
         }
         // me creo la marcha atras del caballo cada segundo cada vez que levante la tecla

@@ -7,7 +7,7 @@ var imagenencontrada = 0;
 var divcartas = "#cajacartas";
 
 var imagenesdeportes = [
-  "./images/corredo.jpg"
+  "./images/corredo.jpg",
   "./images/danza.jpg",
   "./images/mireia.jpg",
   "./images/nadador.jpeg",
@@ -123,11 +123,7 @@ function AbrirCarta(e) {
         if (imagenencontrada == imagenesdeportes.length) {
             //acesso a la bd y suma de puntos
             mandarPuntos(score);
-            $("#cajacartas").append("<span id='success'>Enhorabuena has ganado "+score+" puntos  </span>");
-            $("#mapa").append("<div class='wrapper' id='volverAinicio'><div role='button' class='retro-boton primary'><a class='boton' href='index.php'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al inicio'></span></span></span></span></a></div></div><script  src='../Views/scripts/botones.js'></script>");
-            $('#volverAinicio').click(function(){
-                window.location.replace("../Views/content/mapa.html");
-            });
+            $("#cajacartas").append("<span id='success'>Enhorabuena has ganado "+score+" puntos  <span class='wrapper' id='volverAinicio'><span role='button' class='retro-boton primary'><a class='boton' href='./content/mapa.html'> <span class='boton-inner'><span class='content-wrapper'><span class='boton-content'><span class='boton-content-inner' label='Volver al inicio'></span></span></span></span></a></span></span><script  src='../Views/scripts/botones.js'></script> </span>");
         }
         function mandarPuntos(score){
             var puntos = {puntosMemory: score};
